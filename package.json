@@ -10,7 +10,7 @@
     "lint": "eslint *.js && ng lint",
     "e2e": "ng e2e",
     "heroku-postbuild": "ng build --prod",
-    "pre-commit": "npm run lint"
+    "precommit": "npm run lint"
   },
   "private": true,
   "dependencies": {
