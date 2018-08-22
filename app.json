@@ -17,6 +17,12 @@
     },
     "GA_TRACKING_ID": {
       "description": "Google analytics tracking id"
+    },
+    "API_ENDPOINT": {
+      "description": "Endpoint for API if front-end depends on a backend"
+    },
+    "SERVER_LOG_URL": {
+      "description": "URL which can be used for logging"
     }
   },
   "formation": {
