@@ -19,7 +19,6 @@ The module uses [config](https://www.npmjs.com/package/config) for loading confi
 
 - Create `local.json` for local config.
 - Update `env.js` for loading values via env.
-- `default.json` - for default values.
 
 **Local Development**
 

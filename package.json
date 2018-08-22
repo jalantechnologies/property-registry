@@ -7,9 +7,10 @@
     "build": "ng build",
     "serve": "ng serve",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "eslint *.js && ng lint",
     "e2e": "ng e2e",
-    "heroku-postbuild": "ng build --prod"
+    "heroku-postbuild": "ng build --prod",
+    "pre-commit": "npm run lint"
   },
   "private": true,
   "dependencies": {
@@ -48,6 +49,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
+    "husky": "^0.14.3",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",
