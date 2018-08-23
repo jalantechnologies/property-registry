@@ -9,6 +9,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {Angulartics2Module} from 'angulartics2';
 import {Angulartics2Mixpanel} from 'angulartics2/mixpanel';
 import {Angulartics2GoogleAnalytics} from 'angulartics2/ga';
+import {ModalModule} from 'ngx-bootstrap';
 
 import CONFIG from '@config';
 import {AppComponent} from './app.component';
@@ -52,6 +53,8 @@ class RavenErrorHandler implements ErrorHandler {
     // routing
     RouterModule.forRoot(routes),
     BrowserModule,
+    // bootstrap modal module
+    ModalModule.forRoot(),
     // logging
     LoggerModule.forRoot({
       level: NgxLoggerLevel.DEBUG,
