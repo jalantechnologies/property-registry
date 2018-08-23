@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {ErrorHandler, NgModule} from '@angular/core';
-import {RouterModule} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import * as Raven from 'raven-js';
 import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
@@ -13,23 +12,20 @@ import {ModalModule} from 'ngx-bootstrap';
 
 import CONFIG from '@config';
 import {AppComponent} from './app.component';
-import {NavbarComponent, FooterComponent} from '@core/components';
-import {IntercomService} from '@core/services';
-import {ModulesDeclarations, ModulesRouting} from './modules';
+import {AppRouting} from './app.routing';
+import {NavbarComponent, FooterComponent} from './components';
+import {AboutUsComponent, FeaturesComponent} from './pages';
+import {IntercomService} from './services';
 
 // build declarations
 const declarations = [
-  // core components
+  // app components
   AppComponent,
   NavbarComponent,
   FooterComponent,
-  // modules
-  ...ModulesDeclarations
-];
-
-// build routes
-const routes = [
-  ...ModulesRouting
+  // app pages
+  AboutUsComponent,
+  FeaturesComponent
 ];
 
 function createTranslateLoader(http: HttpClient) {
@@ -50,8 +46,9 @@ class RavenErrorHandler implements ErrorHandler {
 @NgModule({
   declarations,
   imports: [
-    // routing
-    RouterModule.forRoot(routes),
+    // app routing
+    AppRouting,
+    // browser module
     BrowserModule,
     // bootstrap modal module
     ModalModule.forRoot(),

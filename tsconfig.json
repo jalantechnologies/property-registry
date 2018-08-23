@@ -6,9 +6,6 @@
       "@config": [
         "config.ts"
       ],
-      "@core/*": [
-        "app/core/*"
-      ],
       "@shared/*": [
         "app/shared/*"
       ]
