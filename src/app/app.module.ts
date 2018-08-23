@@ -3,7 +3,7 @@ import {ErrorHandler, NgModule} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import * as Raven from 'raven-js';
 import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateModule, TranslateLoader, TranslateService} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {Angulartics2Module} from 'angulartics2';
 import {Angulartics2Mixpanel} from 'angulartics2/mixpanel';
@@ -84,7 +84,12 @@ class RavenErrorHandler implements ErrorHandler {
 })
 
 export class AppModule {
-  constructor() {
+  constructor(public translate: TranslateService) {
+    // for initializing translation service
+    translate.addLangs(['en', 'de']);
+    translate.setDefaultLang('en');
+    const browserLang = translate.getBrowserLang();
+    translate.use(browserLang.match(/en|de/) ? browserLang : 'en');
     // for initializing mixpanel
     // mixpanel.init(CONFIG.mixpanelToken);
     // for initializing google analytics
