@@ -16,6 +16,7 @@ import {AppRouting} from './app.routing';
 import {NavbarComponent, FooterComponent} from './components';
 import {AboutUsComponent, FeaturesComponent} from './pages';
 import {IntercomService} from './services';
+import {ReactiveFormsModule} from '@angular/forms';
 
 // build declarations
 const declarations = [
@@ -52,6 +53,8 @@ class RavenErrorHandler implements ErrorHandler {
     BrowserModule,
     // bootstrap
     NgbModule,
+    // for advanced form directives
+    ReactiveFormsModule,
     // logging
     LoggerModule.forRoot({
       level: NgxLoggerLevel.DEBUG,
