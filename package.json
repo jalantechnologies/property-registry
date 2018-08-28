@@ -29,6 +29,7 @@
     "core-js": "^2.5.4",
     "express": "^4.16.3",
     "rxjs": "^6.0.0",
+    "web3": "0.18.4",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

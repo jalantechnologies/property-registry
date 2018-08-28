@@ -1,7 +1,7 @@
 import {RouterModule} from '@angular/router';
 import {NgModule} from '@angular/core';
 
-import {AboutUsComponent, FeaturesComponent} from './pages';
+import {PropertyDetailComponent, DashboardComponent} from './pages';
 
 @NgModule({
   imports: [
@@ -9,15 +9,15 @@ import {AboutUsComponent, FeaturesComponent} from './pages';
       // pages
       {
         path: '',
-        component: FeaturesComponent
+        component: DashboardComponent
       },
       {
-        path: 'features',
-        component: FeaturesComponent
+        path: 'dashboard',
+        component: DashboardComponent
       },
       {
-        path: 'about-us',
-        component: AboutUsComponent
+        path: 'property-detail',
+        component: PropertyDetailComponent
       }
     ])
   ],

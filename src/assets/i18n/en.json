@@ -1,3 +1,15 @@
 {
-  "HELLO_WORLD": "Hello World"
+  "DASHBOARD_TITLE": "Dashboard",
+  "DASHBOARD_CREATE_PROPERTY_TOKEN_BUTTON": "Create Property Token",
+  "AGREEMENT_FORM_HEADING_PROPERTY_ADDRESS": "Property Address",
+  "AGREEMENT_FORM_PROPERTY_ADDRESS_REQUIRED_ERROR": "Please enter property address",
+  "CREATE_PROPERTY_TOKEN_OWNER_NAME": "Owner Name",
+  "CREATE_PROPERTY_TOKEN_OWNER_NAME_REQUIRED_ERROR": "Please enter owner name",
+  "CREATE_PROPERTY_TOKEN_OWNER_EMAIL": "Owner Email",
+  "CREATE_PROPERTY_TOKEN_OWNER_EMAIL_REQUIRED_ERROR": "Please enter owner email",
+  "CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS": "Owner Wallet Address",
+  "CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS_REQUIRED_ERROR": "Please enter owner wallet address",
+  "SAVING": "Saving",
+  "SIGNIN_FORM_SAVE_BUTTON": "Save",
+  "CREATE_PROPERTY_TOKEN_WAITING_DIALOGUE": "Please wait, transferring property token to its owner"
 }

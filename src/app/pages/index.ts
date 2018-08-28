@@ -1,2 +1,2 @@
-export {AboutUsComponent} from './about-us/about-us.component';
-export {FeaturesComponent} from './features/features.component';
+export {PropertyDetailComponent} from './property-detail/property-detail.component';
+export {DashboardComponent} from './dashboard/dashboard.component';
