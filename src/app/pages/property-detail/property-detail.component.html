@@ -1,5 +1,28 @@
-<div class="container-fluid">
+<div class="container-fluid col-sm-8">
   <h5>
-    We do stuff with technology
-  </h5>
+    Property Detail Page
+  </h5><br/>
+  <div class="row">
+    <div class="col-sm-4">
+      <img src="../../../assets/images/property_image.png" width="100" />
+    </div>
+    <div class="col-sm-8">
+      <h6>{{propertyAddress}}</h6>
+    </div>
+  </div>
+  <br/>
+  <table class="table table-striped">
+    <tr>
+      <th>Owner Name</th>
+      <td>{{propertyDetail.ownerName}}</td>
+    </tr>
+    <tr>
+      <th>Owner Email</th>
+      <td>{{propertyDetail.ownerEmail}}</td>
+    </tr>
+    <tr>
+      <th>Owner Wallet Address</th>
+      <td>{{propertyDetail.ownerWalletAddress}}</td>
+    </tr>
+  </table>
 </div>

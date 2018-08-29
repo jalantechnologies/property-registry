@@ -69,4 +69,20 @@ export class ContractsService {
       return p;
     }
   }
+
+  public async getPropertyOwnerDetails(contractAddress, propertyAddress, index): Promise<any> {
+    if (this._web3) {
+      const a = new Promise<any>((resolve, reject) => {
+        const contractInstance = this._web3.eth.contract(tokenAbi).at(contractAddress);
+        contractInstance.getPropertyOwnerDetails(propertyAddress, index, (error, result) => {
+          if (!error) {
+            resolve(result);
+          } else {
+            reject(error);
+          }
+        });
+      });
+      return a;
+    }
+  }
 }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {ContractsService} from '@services/contract.service';
+import {Router} from '@angular/router';
 
 @Component({
   templateUrl: './dashboard.component.html',
@@ -17,8 +18,11 @@ export class DashboardComponent implements OnInit {
   tokenContractAddress = '0x2e44570a4cbfedb5372ea39a907fc814b1692be6';
   createPropertyTokenError: any;
   metamaskAccount: any;
+  propertyDetails: any;
 
-  constructor(private modalService: NgbModal, private contractService: ContractsService) {}
+  constructor(private modalService: NgbModal, private contractService: ContractsService, private router: Router) {
+    this.propertyDetails = JSON.parse(localStorage.getItem('propertyDetails'));
+  }
 
   ngOnInit() {
     this.contractService.getAccount().then(account => {
@@ -46,7 +50,13 @@ export class DashboardComponent implements OnInit {
     this.contractService.createProperty(this.tokenContractAddress, formData.ownerWalletAddress, formData.propertyAddress,
       formData.ownerName, formData.ownerEmail).then(res => {
       if (res) {
+        if (!this.propertyDetails) {
+          this.propertyDetails = [];
+        }
+        this.propertyDetails.push(res);
+        localStorage.setItem('propertyDetails', JSON.stringify(this.propertyDetails));
         this.creatingPropertyToken = false;
+        this.router.navigate(['/property-detail', res.propertyAddress]);
         this.modalRef.close();
       }
     }).catch(err => {

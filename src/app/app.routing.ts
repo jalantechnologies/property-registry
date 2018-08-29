@@ -16,7 +16,7 @@ import {PropertyDetailComponent, DashboardComponent} from './pages';
         component: DashboardComponent
       },
       {
-        path: 'property-detail',
+        path: 'property-detail/:propertyAddress',
         component: PropertyDetailComponent
       }
     ])
