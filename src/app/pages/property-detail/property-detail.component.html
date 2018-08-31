@@ -22,7 +22,7 @@
     </tr>
     <tr>
       <th>{{ 'CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS' | translate }}</th>
-      <td>{{propertyDetail.ownerWalletAddress}}</td>
+      <td><a href="https://ropsten.etherscan.io/address/{{propertyDetail.ownerWalletAddress}}">{{propertyDetail.ownerWalletAddress}}</a></td>
     </tr>
   </table>
   <h6 class="alert alert-danger" *ngIf="propertyDetailError">{{ 'INVALID_PROPERTY_ADDRESS_ERROR' | translate }}</h6>
