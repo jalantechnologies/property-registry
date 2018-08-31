@@ -2,7 +2,7 @@
   <h5>
     Property Detail Page
   </h5><br/>
-  <div class="row">
+  <div class="row" *ngIf="propertyDetail">
     <div class="col-sm-4">
       <img src="../../../assets/images/property_image.png" width="100" />
     </div>
@@ -11,18 +11,19 @@
     </div>
   </div>
   <br/>
-  <table class="table table-striped">
+  <table class="table table-striped" *ngIf="propertyDetail">
     <tr>
-      <th>Owner Name</th>
+      <th>{{ 'CREATE_PROPERTY_TOKEN_OWNER_NAME' | translate }}</th>
       <td>{{propertyDetail.ownerName}}</td>
     </tr>
     <tr>
-      <th>Owner Email</th>
+      <th>{{ 'CREATE_PROPERTY_TOKEN_OWNER_EMAIL' | translate }}</th>
       <td>{{propertyDetail.ownerEmail}}</td>
     </tr>
     <tr>
-      <th>Owner Wallet Address</th>
+      <th>{{ 'CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS' | translate }}</th>
       <td>{{propertyDetail.ownerWalletAddress}}</td>
     </tr>
   </table>
+  <h6 class="alert alert-danger" *ngIf="propertyDetailError">{{ 'INVALID_PROPERTY_ADDRESS_ERROR' | translate }}</h6>
 </div>

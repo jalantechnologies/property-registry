@@ -13,6 +13,7 @@ export class PropertyDetailComponent implements OnInit {
   propertyAddress: any;
   propertyDetail: any;
   tokenContractAddress = '0x2e44570a4cbfedb5372ea39a907fc814b1692be6';
+  propertyDetailError: any;
 
   constructor(private route: ActivatedRoute, private contractService: ContractsService) {}
 
@@ -25,6 +26,8 @@ export class PropertyDetailComponent implements OnInit {
           ownerEmail: response[1],
           ownerWalletAddress: response[2]
         };
+      }).catch(err => {
+        this.propertyDetailError = true;
       });
     }
   }
