@@ -14,5 +14,6 @@
   "CREATE_PROPERTY_TOKEN_WAITING_DIALOGUE": "Please wait, transferring property token to its owner",
   "SIGNIN_FORM_EMAIL_ADDRESS_PATTERN_ERROR": "Please enter valid email address",
   "SIGNIN_FORM_EMAIL_ADDRESS_REQUIRED_ERROR": "Please enter email address",
-  "INVALID_PROPERTY_ADDRESS_ERROR": "You are trying to access invalid property address"
+  "INVALID_PROPERTY_ADDRESS_ERROR": "You are trying to access invalid property address",
+  "CREATE_PROPERTY_TOKEN_DEED_URL": "Deed URL"
 }
