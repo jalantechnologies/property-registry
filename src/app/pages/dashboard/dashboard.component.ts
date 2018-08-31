@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {ContractsService} from '@services/contract.service';
 import {Router} from '@angular/router';
+import {ViewStateModel} from '@shared/view-state.model';
 
 @Component({
   templateUrl: './dashboard.component.html',
@@ -12,13 +13,12 @@ import {Router} from '@angular/router';
 })
 
 export class DashboardComponent implements OnInit {
-  creatingPropertyToken: boolean;
   propertyTokenForm: FormGroup;
   modalRef: NgbModalRef;
   tokenContractAddress = '0x2e44570a4cbfedb5372ea39a907fc814b1692be6';
-  createPropertyTokenError: any;
   metamaskAccount: any;
   propertyDetails: any;
+  propertyCreationViewState = new ViewStateModel();
 
   constructor(private modalService: NgbModal, private contractService: ContractsService, private router: Router) {
     this.propertyDetails = JSON.parse(localStorage.getItem('propertyDetails'));
@@ -40,13 +40,12 @@ export class DashboardComponent implements OnInit {
   }
 
   createPropertyTokenFormData(content) {
-    this.creatingPropertyToken = false;
     this.setPropertyFormData();
     this.modalRef = this.modalService.open(content, {centered: true});
   }
 
   createPropertyToken(formData) {
-    this.creatingPropertyToken = true;
+    this.propertyCreationViewState.load();
     this.contractService.createProperty(this.tokenContractAddress, formData.ownerWalletAddress, formData.propertyAddress,
       formData.ownerName, formData.ownerEmail).then(res => {
       if (res) {
@@ -55,13 +54,12 @@ export class DashboardComponent implements OnInit {
         }
         this.propertyDetails.push(res);
         localStorage.setItem('propertyDetails', JSON.stringify(this.propertyDetails));
-        this.creatingPropertyToken = false;
         this.router.navigate(['/property-detail', res.propertyAddress]);
         this.modalRef.close();
+        this.propertyCreationViewState.load();
       }
     }).catch(err => {
-      this.creatingPropertyToken = false;
-      this.createPropertyTokenError = 'You rejected the transaction on Metamask!';
+      this.propertyCreationViewState.finishedWithError('You rejected the transaction on Metamask!');
     });
   }
 }

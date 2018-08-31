@@ -29,8 +29,8 @@
       <td>{{propertyDetail.deedURL}}</td>
     </tr>
   </table>
-  <h6 class="alert alert-danger" *ngIf="propertyDetailError">{{ 'INVALID_PROPERTY_ADDRESS_ERROR' | translate }}</h6>
-  <button *ngIf="(propertyDetail | json) != '{}'" type="button" class="btn btn-primary float-left" (click)="getDeedHistory(propertyDetail.propertyAddress, propertyDetail.index+1)" [attr.disabled]='loadingDeedHistory || !propertyDetail.nextIndexExist ? "" : null'>Previous</button>
-  <button *ngIf="(propertyDetail | json) != '{}'" type="button" class="btn btn-primary float-right" (click)="getDeedHistory(propertyDetail.propertyAddress, propertyDetail.index-1)" [attr.disabled]='loadingDeedHistory || !propertyDetail.previousIndexExist ? "" : null'>Next</button>
+  <h6 class="alert alert-danger" *ngIf="propertyDetailsViewState.isFinishedWithError">{{propertyDetailsViewState.error}}</h6>
+  <button *ngIf="(propertyDetail | json) != '{}'" type="button" class="btn btn-primary float-left" (click)="getDeedHistory(propertyDetail.propertyAddress, propertyDetail.index+1)" [attr.disabled]='propertyDetailsViewState.isLoading || !propertyDetail.nextIndexExist ? "" : null'>Previous</button>
+  <button *ngIf="(propertyDetail | json) != '{}'" type="button" class="btn btn-primary float-right" (click)="getDeedHistory(propertyDetail.propertyAddress, propertyDetail.index-1)" [attr.disabled]='propertyDetailsViewState.isLoading || !propertyDetail.previousIndexExist ? "" : null'>Next</button>
 </div>
 <div class="clearfix"></div>

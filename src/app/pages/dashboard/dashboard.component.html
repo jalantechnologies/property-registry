@@ -11,21 +11,21 @@
       <div class="form-row">
         <div class="form-group col">
           <label for="propertyAddress">{{ 'AGREEMENT_FORM_HEADING_PROPERTY_ADDRESS' | translate}}</label>
-          <input type="text" class="form-control" id="propertyAddress" formControlName='propertyAddress' placeholder="{{ 'AGREEMENT_FORM_HEADING_PROPERTY_ADDRESS' | translate}}*" [ngClass]="{'is-invalid': propertyTokenForm.controls.propertyAddress?.errors && propertyTokenForm.controls.propertyAddress?.dirty}" [attr.disabled]='creatingPropertyToken ? "" : null'>
+          <input type="text" class="form-control" id="propertyAddress" formControlName='propertyAddress' placeholder="{{ 'AGREEMENT_FORM_HEADING_PROPERTY_ADDRESS' | translate}}*" [ngClass]="{'is-invalid': propertyTokenForm.controls.propertyAddress?.errors && propertyTokenForm.controls.propertyAddress?.dirty}" [attr.disabled]='propertyCreationViewState.isLoading ? "" : null'>
           <div class="invalid-feedback" *ngIf="propertyTokenForm.controls.propertyAddress.errors && propertyTokenForm.controls.propertyAddress.dirty">{{ 'AGREEMENT_FORM_PROPERTY_ADDRESS_REQUIRED_ERROR' | translate }}</div>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col">
           <label for="ownerName">{{ 'CREATE_PROPERTY_TOKEN_OWNER_NAME' | translate}}</label>
-          <input type="text" class="form-control" id="ownerName" formControlName='ownerName' placeholder="{{ 'CREATE_PROPERTY_TOKEN_OWNER_NAME' | translate}}*" [ngClass]="{'is-invalid': propertyTokenForm.controls.ownerName?.errors && propertyTokenForm.controls.ownerName?.dirty}" [attr.disabled]='creatingPropertyToken ? "" : null'>
+          <input type="text" class="form-control" id="ownerName" formControlName='ownerName' placeholder="{{ 'CREATE_PROPERTY_TOKEN_OWNER_NAME' | translate}}*" [ngClass]="{'is-invalid': propertyTokenForm.controls.ownerName?.errors && propertyTokenForm.controls.ownerName?.dirty}" [attr.disabled]='propertyCreationViewState.isLoading ? "" : null'>
           <div class="invalid-feedback" *ngIf="propertyTokenForm.controls.ownerName.errors && propertyTokenForm.controls.ownerName.dirty">{{ 'CREATE_PROPERTY_TOKEN_OWNER_NAME_REQUIRED_ERROR' | translate }}</div>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col">
           <label for="ownerEmail">{{ 'CREATE_PROPERTY_TOKEN_OWNER_EMAIL' | translate}}</label>
-          <input type="email" class="form-control" id="ownerEmail" formControlName='ownerEmail' placeholder="{{ 'CREATE_PROPERTY_TOKEN_OWNER_EMAIL' | translate}}*" [ngClass]="{'is-invalid': propertyTokenForm.controls.ownerEmail?.errors && propertyTokenForm.controls.ownerEmail?.dirty}" [attr.disabled]='creatingPropertyToken ? "" : null'>
+          <input type="email" class="form-control" id="ownerEmail" formControlName='ownerEmail' placeholder="{{ 'CREATE_PROPERTY_TOKEN_OWNER_EMAIL' | translate}}*" [ngClass]="{'is-invalid': propertyTokenForm.controls.ownerEmail?.errors && propertyTokenForm.controls.ownerEmail?.dirty}" [attr.disabled]='propertyCreationViewState.isLoading ? "" : null'>
           <div class="invalid-feedback" *ngIf="propertyTokenForm.controls.ownerEmail.errors?.required">{{ 'SIGNIN_FORM_EMAIL_ADDRESS_REQUIRED_ERROR' | translate }}</div>
           <div class="invalid-feedback" *ngIf="!propertyTokenForm.controls.ownerEmail.errors?.required && propertyTokenForm.controls.ownerEmail.errors?.email">{{ 'SIGNIN_FORM_EMAIL_ADDRESS_PATTERN_ERROR' | translate }}</div>
         </div>
@@ -33,15 +33,15 @@
       <div class="form-row">
         <div class="form-group col">
           <label for="ownerWalletAddress">{{ 'CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS' | translate}}</label>
-          <input type="text" class="form-control" id="ownerWalletAddress" formControlName='ownerWalletAddress' placeholder="{{ 'CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS' | translate}}*" [ngClass]="{'is-invalid': propertyTokenForm.controls.ownerWalletAddress?.errors && propertyTokenForm.controls.ownerWalletAddress?.dirty}" [attr.disabled]='creatingPropertyToken ? "" : null'>
+          <input type="text" class="form-control" id="ownerWalletAddress" formControlName='ownerWalletAddress' placeholder="{{ 'CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS' | translate}}*" [ngClass]="{'is-invalid': propertyTokenForm.controls.ownerWalletAddress?.errors && propertyTokenForm.controls.ownerWalletAddress?.dirty}" [attr.disabled]='propertyCreationViewState.isLoading ? "" : null'>
           <div class="invalid-feedback" *ngIf="propertyTokenForm.controls.ownerWalletAddress.errors && propertyTokenForm.controls.ownerWalletAddress.dirty">{{ 'CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS_REQUIRED_ERROR' | translate }}</div>
         </div>
       </div>
-      <div class="alert alert-success" *ngIf="creatingPropertyToken"><i class="fa fa-spinner fa-spin" *ngIf='creatingPropertyToken' style="font-size: 20px;"></i> {{ 'CREATE_PROPERTY_TOKEN_WAITING_DIALOGUE' | translate }}</div>
-      <div class="alert alert-danger" *ngIf="createPropertyTokenError && !creatingPropertyToken">{{createPropertyTokenError}}</div>
-      <button type="submit" class="btn btn-primary" [disabled]="!propertyTokenForm.valid || creatingPropertyToken">
-        <span *ngIf="!creatingPropertyToken">{{ 'SIGNIN_FORM_SAVE_BUTTON' | translate }} </span>
-        <span *ngIf="creatingPropertyToken">{{ 'SAVING' | translate }} </span>
+      <div class="alert alert-success" *ngIf="propertyCreationViewState.isLoading"><i class="fa fa-spinner fa-spin" *ngIf='propertyCreationViewState.isLoading' style="font-size: 20px;"></i> {{ 'CREATE_PROPERTY_TOKEN_WAITING_DIALOGUE' | translate }}</div>
+      <div class="alert alert-danger" *ngIf="propertyCreationViewState.isFinishedWithError && !propertyCreationViewState.isLoading">{{propertyCreationViewState.error}}</div>
+      <button type="submit" class="btn btn-primary" [disabled]="!propertyTokenForm.valid || propertyCreationViewState.isLoading">
+        <span *ngIf="!propertyCreationViewState.isLoading">{{ 'SIGNIN_FORM_SAVE_BUTTON' | translate }} </span>
+        <span *ngIf="propertyCreationViewState.isLoading">{{ 'SAVING' | translate }} </span>
       </button>
     </form>
   </div>

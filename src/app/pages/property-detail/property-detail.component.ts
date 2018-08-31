@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ContractsService} from '@services/contract.service';
+import {ViewStateModel} from '@shared/view-state.model';
 
 @Component({
   templateUrl: './property-detail.component.html',
@@ -13,8 +14,7 @@ export class PropertyDetailComponent implements OnInit {
   propertyAddress: any;
   propertyDetail: any;
   tokenContractAddress = '0x2e44570a4cbfedb5372ea39a907fc814b1692be6';
-  propertyDetailError: any;
-  loadingDeedHistory = false;
+  propertyDetailsViewState = new ViewStateModel();
 
   constructor(private route: ActivatedRoute, private contractService: ContractsService) {}
 
@@ -26,8 +26,8 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   getDeedHistory(propertyAddress, index) {
+    this.propertyDetailsViewState.load();
     this.propertyDetail = {};
-    this.loadingDeedHistory = true;
     this.contractService.getPropertyOwnerDetails(this.tokenContractAddress, this.propertyAddress, index).then(response => {
       this.propertyDetail = {
         ownerName: response[0],
@@ -39,11 +39,9 @@ export class PropertyDetailComponent implements OnInit {
         propertyAddress: propertyAddress,
         index: index
       };
-      this.loadingDeedHistory = false;
+      this.propertyDetailsViewState.load();
     }).catch(err => {
-      this.loadingDeedHistory = false;
-      this.propertyDetailError = true;
-      this.loadingDeedHistory = false;
+      this.propertyDetailsViewState.finishedWithError('You are trying to access invalid property address');
     });
   }
 }
