@@ -1,6 +1,6 @@
 <div class="container-fluid col-sm-8">
   <h5>
-    Property Detail Page
+    {{ 'PROPERTY_DETAIL_PAGE' | translate }}
   </h5><br/>
   <div class="row" *ngIf="(propertyDetail | json) != '{}'">
     <div class="col-sm-4">
@@ -22,7 +22,7 @@
     </tr>
     <tr>
       <th>{{ 'CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS' | translate }}</th>
-      <td><a href="https://ropsten.etherscan.io/address/{{propertyDetail.ownerWalletAddress}}">{{propertyDetail.ownerWalletAddress}}</a></td>
+      <td><a href="{{ropstenURL}}{{propertyDetail.ownerWalletAddress}}">{{propertyDetail.ownerWalletAddress}}</a></td>
     </tr>
     <tr>
       <th>{{ 'CREATE_PROPERTY_TOKEN_DEED_URL' | translate }}</th>
@@ -30,7 +30,7 @@
     </tr>
   </table>
   <h6 class="alert alert-danger" *ngIf="propertyDetailsViewState.isFinishedWithError">{{propertyDetailsViewState.error}}</h6>
-  <button *ngIf="(propertyDetail | json) != '{}'" type="button" class="btn btn-primary float-left" (click)="getDeedHistory(propertyDetail.propertyAddress, propertyDetail.index+1)" [attr.disabled]='propertyDetailsViewState.isLoading || !propertyDetail.nextIndexExist ? "" : null'>Previous</button>
-  <button *ngIf="(propertyDetail | json) != '{}'" type="button" class="btn btn-primary float-right" (click)="getDeedHistory(propertyDetail.propertyAddress, propertyDetail.index-1)" [attr.disabled]='propertyDetailsViewState.isLoading || !propertyDetail.previousIndexExist ? "" : null'>Next</button>
+  <button *ngIf="(propertyDetail | json) != '{}'" type="button" class="btn btn-primary float-left" (click)="getDeedHistory(propertyDetail.propertyAddress, propertyDetail.index+1)" [attr.disabled]='propertyDetailsViewState.isLoading || !propertyDetail.nextIndexExist ? "" : null'>{{ 'PREVIOUS' | translate }}</button>
+  <button *ngIf="(propertyDetail | json) != '{}'" type="button" class="btn btn-primary float-right" (click)="getDeedHistory(propertyDetail.propertyAddress, propertyDetail.index-1)" [attr.disabled]='propertyDetailsViewState.isLoading || !propertyDetail.previousIndexExist ? "" : null'>{{ 'NEXT' | translate }}</button>
 </div>
 <div class="clearfix"></div>

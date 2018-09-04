@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ContractsService} from '@services/contract.service';
 import {ViewStateModel} from '@shared/view-state.model';
+import CONFIG from '@config';
 
 @Component({
   templateUrl: './property-detail.component.html',
@@ -13,8 +14,9 @@ import {ViewStateModel} from '@shared/view-state.model';
 export class PropertyDetailComponent implements OnInit {
   propertyAddress: any;
   propertyDetail: any;
-  tokenContractAddress = '0x2e44570a4cbfedb5372ea39a907fc814b1692be6';
+  tokenContractAddress = CONFIG.contractAddress;
   propertyDetailsViewState = new ViewStateModel();
+  ropstenURL = CONFIG.ropstenURL;
 
   constructor(private route: ActivatedRoute, private contractService: ContractsService) {}
 

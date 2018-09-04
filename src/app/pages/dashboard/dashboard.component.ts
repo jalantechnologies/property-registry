@@ -4,6 +4,7 @@ import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {ContractsService} from '@services/contract.service';
 import {Router} from '@angular/router';
 import {ViewStateModel} from '@shared/view-state.model';
+import CONFIG from '@config';
 
 @Component({
   templateUrl: './dashboard.component.html',
@@ -15,7 +16,7 @@ import {ViewStateModel} from '@shared/view-state.model';
 export class DashboardComponent implements OnInit {
   propertyTokenForm: FormGroup;
   modalRef: NgbModalRef;
-  tokenContractAddress = '0x2e44570a4cbfedb5372ea39a907fc814b1692be6';
+  tokenContractAddress = CONFIG.contractAddress;
   metamaskAccount: any;
   propertyDetails: any;
   propertyCreationViewState = new ViewStateModel();
