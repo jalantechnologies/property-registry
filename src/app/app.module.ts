@@ -29,7 +29,7 @@ const declarations = [
   DashboardComponent
 ];
 
-function createTranslateLoader(http: HttpClient) {
+export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
@@ -38,7 +38,7 @@ Raven
   .config(CONFIG.sentryDSN)
   .install();
 
-class RavenErrorHandler implements ErrorHandler {
+export class RavenErrorHandler implements ErrorHandler {
   handleError(err: any): void {
     Raven.captureException(err);
   }
