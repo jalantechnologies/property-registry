@@ -5,6 +5,12 @@
     "NODE_CONFIG_ENV": {
       "description": "Realm for loading config entries. Defaults to env.",
       "value": "env"
+    },
+    "contractAddress": {
+      "required": true
+    },
+    "ropstenURL": {
+      "required": true
     }
   },
   "formation": {
