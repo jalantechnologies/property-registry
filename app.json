@@ -5,12 +5,6 @@
     "NODE_CONFIG_ENV": {
       "description": "Realm for loading config entries. Defaults to env.",
       "value": "env"
-    },
-    "ropstenURL": {
-      "description": "Ropsten url"
-    },
-    "contractAddress": {
-      "description": "Contract address on which PRT token is deployed"
     }
   },
   "formation": {
