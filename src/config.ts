@@ -6,7 +6,9 @@ declare const CONFIG: {
   serverLogUrl: string,
   intercomAppId: string,
   mixpanelToken: string,
-  gaTrackingId: string
+  gaTrackingId: string,
+  ropstenURL: string,
+  contractAddress: string
 };
 
 export default CONFIG;

@@ -1,3 +1,25 @@
 {
-  "HELLO_WORLD": "Hello World"
+  "DASHBOARD_TITLE": "Dashboard",
+  "DASHBOARD_CREATE_PROPERTY_TOKEN_BUTTON": "Create Property Token",
+  "AGREEMENT_FORM_HEADING_PROPERTY_ADDRESS": "Property Address",
+  "AGREEMENT_FORM_PROPERTY_ADDRESS_REQUIRED_ERROR": "Please enter property address",
+  "CREATE_PROPERTY_TOKEN_OWNER_NAME": "Owner Name",
+  "CREATE_PROPERTY_TOKEN_OWNER_NAME_REQUIRED_ERROR": "Please enter owner name",
+  "CREATE_PROPERTY_TOKEN_OWNER_EMAIL": "Owner Email",
+  "CREATE_PROPERTY_TOKEN_OWNER_EMAIL_REQUIRED_ERROR": "Please enter owner email",
+  "CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS": "Owner Wallet Address",
+  "CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS_REQUIRED_ERROR": "Please enter owner wallet address",
+  "SAVING": "Saving",
+  "SIGNIN_FORM_SAVE_BUTTON": "Save",
+  "CREATE_PROPERTY_TOKEN_WAITING_DIALOGUE": "Please wait, transferring property token to its owner",
+  "SIGNIN_FORM_EMAIL_ADDRESS_PATTERN_ERROR": "Please enter valid email address",
+  "SIGNIN_FORM_EMAIL_ADDRESS_REQUIRED_ERROR": "Please enter email address",
+  "INVALID_PROPERTY_ADDRESS_ERROR": "You are trying to access invalid property address",
+  "CREATE_PROPERTY_TOKEN_DEED_URL": "Deed URL",
+  "PREVIOUS": "Previous",
+  "NEXT": "Next",
+  "PROPERTY_DETAIL_PAGE": "Property Detail Page",
+  "VIEW_PREVIOUS_OWNERS": "View previous owners",
+  "TITLE_HISTORY": "Title History",
+  "METAMASK_TRANSACTION_REJECTED_ERROR": "You rejected the transaction on Metamask!"
 }

@@ -14,7 +14,7 @@ import CONFIG from '@config';
 import {AppComponent} from './app.component';
 import {AppRouting} from './app.routing';
 import {NavbarComponent, FooterComponent} from './components';
-import {AboutUsComponent, FeaturesComponent} from './pages';
+import {PropertyDetailComponent, DashboardComponent} from './pages';
 import {IntercomService} from './services';
 import {ReactiveFormsModule} from '@angular/forms';
 
@@ -25,11 +25,11 @@ const declarations = [
   NavbarComponent,
   FooterComponent,
   // app pages
-  AboutUsComponent,
-  FeaturesComponent
+  PropertyDetailComponent,
+  DashboardComponent
 ];
 
-function createTranslateLoader(http: HttpClient) {
+export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
@@ -38,7 +38,7 @@ Raven
   .config(CONFIG.sentryDSN)
   .install();
 
-class RavenErrorHandler implements ErrorHandler {
+export class RavenErrorHandler implements ErrorHandler {
   handleError(err: any): void {
     Raven.captureException(err);
   }
