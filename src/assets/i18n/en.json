@@ -18,5 +18,7 @@
   "CREATE_PROPERTY_TOKEN_DEED_URL": "Deed URL",
   "PREVIOUS": "Previous",
   "NEXT": "Next",
-  "PROPERTY_DETAIL_PAGE": "Property Detail Page"
+  "PROPERTY_DETAIL_PAGE": "Property Detail Page",
+  "VIEW_PREVIOUS_OWNERS": "View previous owners",
+  "TITLE_HISTORY": "Title History"
 }
