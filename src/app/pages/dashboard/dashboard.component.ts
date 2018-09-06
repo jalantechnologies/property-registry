@@ -60,7 +60,7 @@ export class DashboardComponent implements OnInit {
         this.propertyCreationViewState.load();
       }
     }).catch(err => {
-      this.propertyCreationViewState.finishedWithError('You rejected the transaction on Metamask!');
+      this.propertyCreationViewState.finishedWithError();
     });
   }
 }

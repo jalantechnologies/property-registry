@@ -20,5 +20,6 @@
   "NEXT": "Next",
   "PROPERTY_DETAIL_PAGE": "Property Detail Page",
   "VIEW_PREVIOUS_OWNERS": "View previous owners",
-  "TITLE_HISTORY": "Title History"
+  "TITLE_HISTORY": "Title History",
+  "METAMASK_TRANSACTION_REJECTED_ERROR": "You rejected the transaction on Metamask!"
 }

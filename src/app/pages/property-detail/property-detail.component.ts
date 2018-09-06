@@ -66,9 +66,9 @@ export class PropertyDetailComponent implements OnInit {
       }
     }).catch(err => {
       if (currentOwner) {
-        this.propertyDetailsViewState.finishedWithError('You are trying to access invalid property address');
+        this.propertyDetailsViewState.finishedWithError();
       } else {
-        this.historyViewState.finishedWithError('You are trying to access invalid property address');
+        this.historyViewState.finishedWithError();
       }
     });
   }

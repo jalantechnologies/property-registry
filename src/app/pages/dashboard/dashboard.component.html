@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="alert alert-success" *ngIf="propertyCreationViewState.isLoading"><i class="fa fa-spinner fa-spin" *ngIf='propertyCreationViewState.isLoading' style="font-size: 20px;"></i> {{ 'CREATE_PROPERTY_TOKEN_WAITING_DIALOGUE' | translate }}</div>
-      <div class="alert alert-danger" *ngIf="propertyCreationViewState.isFinishedWithError && !propertyCreationViewState.isLoading">{{propertyCreationViewState.error}}</div>
+      <div class="alert alert-danger" *ngIf="propertyCreationViewState.isFinishedWithError && !propertyCreationViewState.isLoading">{{ 'METAMASK_TRANSACTION_REJECTED_ERROR' | translate }}</div>
       <button type="submit" class="btn btn-primary" [disabled]="!propertyTokenForm.valid || propertyCreationViewState.isLoading">
         <span *ngIf="!propertyCreationViewState.isLoading">{{ 'SIGNIN_FORM_SAVE_BUTTON' | translate }} </span>
         <span *ngIf="propertyCreationViewState.isLoading">{{ 'SAVING' | translate }} </span>
