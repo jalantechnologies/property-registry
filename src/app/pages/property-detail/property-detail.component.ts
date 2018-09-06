@@ -15,18 +15,20 @@ import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 export class PropertyDetailComponent implements OnInit {
   propertyAddress: any;
   propertyDetail: any;
+  currentOwnerDetail: any;
   tokenContractAddress = CONFIG.contractAddress;
   propertyDetailsViewState = new ViewStateModel();
   ropstenURL = CONFIG.ropstenURL;
   modalRef: NgbModalRef;
   previousOwnerExist = false;
+  historyViewState = new ViewStateModel();
 
   constructor(private route: ActivatedRoute, private contractService: ContractsService, private modalService: NgbModal) {}
 
   ngOnInit() {
     this.propertyAddress = this.route.snapshot.paramMap.get('propertyAddress');
     if (this.propertyAddress) {
-      this.getDeedHistory(this.propertyAddress, 1);
+      this.getDeedHistory(this.propertyAddress, 1, true);
     }
   }
 
@@ -35,11 +37,16 @@ export class PropertyDetailComponent implements OnInit {
     this.getDeedHistory(propertyAddress, index);
   }
 
-  getDeedHistory(propertyAddress, index) {
-    this.propertyDetailsViewState.load();
-    this.propertyDetail = {};
+  getDeedHistory(propertyAddress, index, currentOwner = false) {
+    if (currentOwner) {
+      this.propertyDetailsViewState.load();
+      this.currentOwnerDetail = {};
+    } else  {
+      this.propertyDetail = {};
+      this.historyViewState.load();
+    }
     this.contractService.getPropertyOwnerDetails(this.tokenContractAddress, this.propertyAddress, index).then(response => {
-      this.propertyDetail = {
+      const detail = {
         ownerName: response[0],
         ownerEmail: response[1],
         ownerWalletAddress: response[2],
@@ -49,12 +56,20 @@ export class PropertyDetailComponent implements OnInit {
         propertyAddress: propertyAddress,
         index: index
       };
-      if (index && index === 1) {
+      if (currentOwner) {
         this.previousOwnerExist = !!response[4];
+        this.currentOwnerDetail = detail;
+        this.propertyDetailsViewState.finishedWithSuccess();
+      } else {
+        this.propertyDetail = detail;
+        this.historyViewState.finishedWithSuccess();
       }
-      this.propertyDetailsViewState.finishedWithSuccess();
     }).catch(err => {
-      this.propertyDetailsViewState.finishedWithError('You are trying to access invalid property address');
+      if (currentOwner) {
+        this.propertyDetailsViewState.finishedWithError('You are trying to access invalid property address');
+      } else {
+        this.historyViewState.finishedWithError('You are trying to access invalid property address');
+      }
     });
   }
 }

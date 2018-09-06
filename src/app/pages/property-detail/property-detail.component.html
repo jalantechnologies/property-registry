@@ -2,7 +2,7 @@
   <h5>
     {{ 'PROPERTY_DETAIL_PAGE' | translate }}
   </h5><br/>
-  <div class="row" *ngIf="(propertyDetail | json) != '{}'">
+  <div class="row" *ngIf="(currentOwnerDetail | json) != '{}'">
     <div class="col-sm-4">
       <img src="../../../assets/images/property_image.png" width="100" />
     </div>
@@ -14,22 +14,22 @@
   <div *ngIf="propertyDetailsViewState.isLoading" style="text-align: center; width: 100%;">
     <i class="fa fa-spinner fa-spin" *ngIf='propertyDetailsViewState.isLoading' style="font-size: 50px;"></i>
   </div>
-  <table class="table table-striped" *ngIf="(propertyDetail | json) != '{}'">
+  <table class="table table-striped" *ngIf="(currentOwnerDetail | json) != '{}'">
     <tr>
       <th>{{ 'CREATE_PROPERTY_TOKEN_OWNER_NAME' | translate }}</th>
-      <td>{{propertyDetail.ownerName}}</td>
+      <td>{{currentOwnerDetail.ownerName}}</td>
     </tr>
     <tr>
       <th>{{ 'CREATE_PROPERTY_TOKEN_OWNER_EMAIL' | translate }}</th>
-      <td>{{propertyDetail.ownerEmail}}</td>
+      <td>{{currentOwnerDetail.ownerEmail}}</td>
     </tr>
     <tr>
       <th>{{ 'CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS' | translate }}</th>
-      <td><a href="{{ropstenURL}}{{propertyDetail.ownerWalletAddress}}">{{propertyDetail.ownerWalletAddress}}</a></td>
+      <td><a href="{{ropstenURL}}{{currentOwnerDetail.ownerWalletAddress}}">{{currentOwnerDetail.ownerWalletAddress}}</a></td>
     </tr>
     <tr>
       <th>{{ 'CREATE_PROPERTY_TOKEN_DEED_URL' | translate }}</th>
-      <td>{{propertyDetail.deedURL}}</td>
+      <td>{{currentOwnerDetail.deedURL}}</td>
     </tr>
   </table>
   <h6 class="alert alert-danger" *ngIf="propertyDetailsViewState.isFinishedWithError">{{propertyDetailsViewState.error}}</h6>
@@ -39,9 +39,9 @@
     </div>
     <div class="modal-body">
       <div style="text-align: center; width: 100%;">
-        <i class="fa fa-spinner fa-spin" *ngIf='propertyDetailsViewState.isLoading' style="font-size: 50px;"></i>
+        <i class="fa fa-spinner fa-spin" *ngIf='historyViewState.isLoading' style="font-size: 50px;"></i>
       </div>
-      <table class="table table-striped" *ngIf="!propertyDetailsViewState.isLoading">
+      <table class="table table-striped" *ngIf="!historyViewState.isLoading">
         <tr>
           <th>{{ 'CREATE_PROPERTY_TOKEN_OWNER_NAME' | translate }}</th>
           <td>{{propertyDetail.ownerName}}</td>
@@ -61,10 +61,10 @@
       </table>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-primary" (click)="getDeedHistory(propertyDetail.propertyAddress, propertyDetail.index+1)" [attr.disabled]='propertyDetailsViewState.isLoading || !propertyDetail.nextIndexExist ? "" : null'>{{ 'PREVIOUS' | translate }}</button>
-      <button type="button" class="btn btn-primary" (click)="getDeedHistory(propertyDetail.propertyAddress, propertyDetail.index-1)" [attr.disabled]='propertyDetailsViewState.isLoading || !propertyDetail.previousIndexExist ? "" : null'>{{ 'NEXT' | translate }}</button>
+      <button type="button" class="btn btn-primary" (click)="getDeedHistory(propertyDetail.propertyAddress, propertyDetail.index+1)" [attr.disabled]='historyViewState.isLoading || !propertyDetail.nextIndexExist ? "" : null'>{{ 'PREVIOUS' | translate }}</button>
+      <button type="button" class="btn btn-primary" (click)="getDeedHistory(propertyDetail.propertyAddress, propertyDetail.index-1)" [attr.disabled]='historyViewState.isLoading || !propertyDetail.previousIndexExist ? "" : null'>{{ 'NEXT' | translate }}</button>
     </div>
   </ng-template>
-  <button *ngIf="(propertyDetail | json) != '{}'" type="button" class="btn btn-sm btn-outline-secondary float-right" (click)="openDeedHistoryModal(deedHistoryModal, propertyAddress, 2)" [attr.disabled]='propertyDetailsViewState.isLoading || !previousOwnerExist ? "" : null'>{{ 'VIEW_PREVIOUS_OWNERS' | translate }}</button>
+  <button *ngIf="(currentOwnerDetail | json) != '{}'" type="button" class="btn btn-sm btn-outline-secondary float-right" (click)="openDeedHistoryModal(deedHistoryModal, propertyAddress, 2)" [attr.disabled]='propertyDetailsViewState.isLoading || !previousOwnerExist ? "" : null'>{{ 'VIEW_PREVIOUS_OWNERS' | translate }}</button>
 </div>
 <div class="clearfix"></div>
