@@ -41,7 +41,7 @@ export class PropertyDetailComponent implements OnInit {
         propertyAddress: propertyAddress,
         index: index
       };
-      this.propertyDetailsViewState.load();
+      this.propertyDetailsViewState.finishedWithSuccess();
     }).catch(err => {
       this.propertyDetailsViewState.finishedWithError('You are trying to access invalid property address');
     });

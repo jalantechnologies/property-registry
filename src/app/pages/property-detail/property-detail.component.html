@@ -11,6 +11,9 @@
     </div>
   </div>
   <br/>
+  <div *ngIf="propertyDetailsViewState.isLoading" style="text-align: center; width: 100%;">
+    <i class="fa fa-spinner fa-spin" *ngIf='propertyDetailsViewState.isLoading' style="font-size: 50px;"></i>
+  </div>
   <table class="table table-striped" *ngIf="(propertyDetail | json) != '{}'">
     <tr>
       <th>{{ 'CREATE_PROPERTY_TOKEN_OWNER_NAME' | translate }}</th>
