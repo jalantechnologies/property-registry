@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit {
           this.router.navigate(['/property-detail', response.propertyAddress]);
         });
         this.modalRef.close();
-        this.propertyCreationViewState.load();
+        this.propertyCreationViewState.finishedWithSuccess();
       }
     }).catch(err => {
       this.propertyCreationViewState.finishedWithError();
