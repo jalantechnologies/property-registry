@@ -11,6 +11,9 @@
     },
     "ropstenURL": {
       "required": true
+    },
+    "apiEndpoint": {
+      "required": true
     }
   },
   "formation": {
