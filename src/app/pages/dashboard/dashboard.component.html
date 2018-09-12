@@ -1,6 +1,26 @@
 <div class="container-fluid">
   <h1 class="float-left">{{ 'DASHBOARD_TITLE' | translate }}</h1>
   <p class="float-right"><button type="button" class="btn btn-primary btn-sm btn-block" (click)="createPropertyTokenFormData(createPropertyTokenModal)">{{ 'DASHBOARD_CREATE_PROPERTY_TOKEN_BUTTON' | translate }}</button></p>
+  <div class="clearfix"></div>
+  <br/>
+  <div class="row">
+    <div class="col-sm-4"></div>
+    <input class="col-sm-4" type="text"
+           matInput
+           [formControl]="searchProperty"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)='searchPropertyAddress($event.option.value)'>
+      <mat-option *ngFor="let address of propertyAddresses" [value]="address" class="col-sm-4">
+        {{ address }}
+      </mat-option>
+    </mat-autocomplete>
+  </div>
+  <div class="clearfix"></div>
+  <br/>
+  <div class="row">
+    <span class="col-sm-5"></span>
+    <button type="button" class="btn btn-primary col-sm-2" (click)="searchPropertyAddress()">Search Property</button>
+  </div>
 </div>
 <ng-template #createPropertyTokenModal>
   <div class="modal-header">

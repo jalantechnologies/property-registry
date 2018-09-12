@@ -17,6 +17,8 @@ import {NavbarComponent, FooterComponent} from './components';
 import {PropertyDetailComponent, DashboardComponent} from './pages';
 import {IntercomService} from './services';
 import {ReactiveFormsModule} from '@angular/forms';
+import {MatAutocompleteModule, MatInputModule} from '@angular/material';
+import {FormsModule} from '@angular/forms';
 
 // build declarations
 const declarations = [
@@ -74,7 +76,10 @@ export class RavenErrorHandler implements ErrorHandler {
     Angulartics2Module.forRoot([
       Angulartics2Mixpanel,
       Angulartics2GoogleAnalytics
-    ])
+    ]),
+    MatAutocompleteModule,
+    MatInputModule,
+    FormsModule
   ],
   providers: [
     {

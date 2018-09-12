@@ -19,18 +19,27 @@ export class DashboardComponent implements OnInit {
   modalRef: NgbModalRef;
   tokenContractAddress = CONFIG.contractAddress;
   metamaskAccount: any;
-  propertyDetails: any;
   propertyCreationViewState = new ViewStateModel();
+  propertyAddresses = [];
+  searchProperty: FormControl = new FormControl();
 
   constructor(private modalService: NgbModal, private contractService: ContractsService, private router: Router,
               private propertyService: PropertyService) {
-    this.propertyDetails = JSON.parse(localStorage.getItem('propertyDetails'));
   }
 
   ngOnInit() {
     this.contractService.getAccount().then(account => {
       this.metamaskAccount = account;
     });
+    this.searchProperty.valueChanges.subscribe(
+      propertyAddress => {
+        if (propertyAddress !== '') {
+          this.propertyService.getPropertyAddress(propertyAddress).subscribe(
+            data => {
+              this.propertyAddresses = data as any[];
+            });
+        }
+      });
   }
 
   setPropertyFormData() {
@@ -61,5 +70,10 @@ export class DashboardComponent implements OnInit {
     }).catch(err => {
       this.propertyCreationViewState.finishedWithError();
     });
+  }
+
+  searchPropertyAddress(address) {
+    address = address ? address : this.searchProperty.value;
+    this.router.navigate(['/property-detail', address]);
   }
 }

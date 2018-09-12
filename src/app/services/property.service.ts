@@ -24,4 +24,8 @@ export class PropertyService {
     return this.httpClient.post<any>(`${CONFIG.apiEndpoint}property`, data, this.getAuthHeaders());
   }
 
+  public getPropertyAddress(propertyAddress): Observable<any> {
+    return this.httpClient.get<any>(`${CONFIG.apiEndpoint}property?q=${propertyAddress}`, this.getAuthHeaders());
+  }
+
 }
