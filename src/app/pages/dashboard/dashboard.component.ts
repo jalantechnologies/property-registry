@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {ContractsService} from '@services/contract.service';
@@ -11,7 +11,8 @@ import {PropertyService} from '@services/property.service';
   templateUrl: './dashboard.component.html',
   styleUrls: [
     './dashboard.component.css'
-  ]
+  ],
+  encapsulation: ViewEncapsulation.None,
 })
 
 export class DashboardComponent implements OnInit {
