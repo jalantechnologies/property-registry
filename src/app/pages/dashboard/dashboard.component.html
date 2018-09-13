@@ -9,7 +9,7 @@
            matInput
            [formControl]="searchProperty"
            [matAutocomplete]="auto">
-    <div class="col-sm-2"><button type="button" class="btn btn-primary float-right" (click)="searchPropertyAddress()">Search Property</button></div>
+    <div class="col-sm-2"><button type="button" class="btn btn-primary float-right" (click)="searchPropertyAddress('')">Search Property</button></div>
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)='searchPropertyAddress($event.option.value)' class="autocomplete">
       <mat-option *ngFor="let address of propertyAddresses" [value]="address" class="col-sm-4 demo">
         {{ address }}
