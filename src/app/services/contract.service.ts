@@ -15,17 +15,13 @@ export class ContractsService {
   private _account: string = null;
   private _web3: any;
 
-
-  constructor() {
+  public async getAccount(): Promise<string> {
     if (typeof window.web3 !== 'undefined') {
       // Use MetaMask's provider
       this._web3 = new Web3(window.web3.currentProvider);
     } else {
       alert('Please use a dapp browser MetaMask plugin for chrome');
     }
-  }
-
-  public async getAccount(): Promise<string> {
     if (this._account == null) {
       this._account = await new Promise((resolve, reject) => {
         this._web3.eth.getAccounts((err, accs) => {
@@ -49,6 +45,12 @@ export class ContractsService {
   }
 
   public async createProperty(contractAddress, walletAddress, propertyAddress, ownerName, ownerEmail): Promise<any> {
+    if (typeof window.web3 !== 'undefined') {
+      // Use MetaMask's provider
+      this._web3 = new Web3(window.web3.currentProvider);
+    } else {
+      alert('Please use a dapp browser MetaMask plugin for chrome');
+    }
     if (this._web3) {
       const p = new Promise<any>((resolve, reject) => {
         const contractInstance = this._web3.eth.contract(tokenAbi).at(contractAddress);
@@ -71,6 +73,9 @@ export class ContractsService {
   }
 
   public async getPropertyOwnerDetails(contractAddress, propertyAddress, index): Promise<any> {
+    if (typeof window.web3 !== 'undefined') {
+      this._web3 = new Web3(window.web3.currentProvider);
+    }
     if (this._web3) {
       const a = new Promise<any>((resolve, reject) => {
         const contractInstance = this._web3.eth.contract(tokenAbi).at(contractAddress);

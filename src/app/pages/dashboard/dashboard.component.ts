@@ -29,9 +29,6 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.contractService.getAccount().then(account => {
-      this.metamaskAccount = account;
-    });
     this.searchProperty.valueChanges.subscribe(
       propertyAddress => {
         if (propertyAddress !== '') {
@@ -53,8 +50,11 @@ export class DashboardComponent implements OnInit {
   }
 
   createPropertyTokenFormData(content) {
-    this.setPropertyFormData();
-    this.modalRef = this.modalService.open(content, {centered: true});
+    this.contractService.getAccount().then(account => {
+      this.metamaskAccount = account;
+      this.setPropertyFormData();
+      this.modalRef = this.modalService.open(content, {centered: true});
+    });
   }
 
   createPropertyToken(formData) {

@@ -46,23 +46,27 @@ export class PropertyDetailComponent implements OnInit {
       this.historyViewState.load();
     }
     this.contractService.getPropertyOwnerDetails(this.tokenContractAddress, this.propertyAddress, index).then(response => {
-      const detail = {
-        ownerName: response[0],
-        ownerEmail: response[1],
-        ownerWalletAddress: response[2],
-        deedURL: response[3],
-        nextIndexExist: response[4],
-        previousIndexExist: response[5],
-        propertyAddress: propertyAddress,
-        index: index
-      };
-      if (currentOwner) {
-        this.previousOwnerExist = !!response[4];
-        this.currentOwnerDetail = detail;
-        this.propertyDetailsViewState.finishedWithSuccess();
+      if (response) {
+        const detail = {
+          ownerName: response[0],
+          ownerEmail: response[1],
+          ownerWalletAddress: response[2],
+          deedURL: response[3],
+          nextIndexExist: response[4],
+          previousIndexExist: response[5],
+          propertyAddress: propertyAddress,
+          index: index
+        };
+        if (currentOwner) {
+          this.previousOwnerExist = !!response[4];
+          this.currentOwnerDetail = detail;
+          this.propertyDetailsViewState.finishedWithSuccess();
+        } else {
+          this.propertyDetail = detail;
+          this.historyViewState.finishedWithSuccess();
+        }
       } else {
-        this.propertyDetail = detail;
-        this.historyViewState.finishedWithSuccess();
+        this.propertyDetailsViewState.finishedWithError();
       }
     }).catch(err => {
       if (currentOwner) {
