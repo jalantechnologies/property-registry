@@ -38,9 +38,6 @@ export class DashboardComponent implements OnInit {
             });
         }
       });
-    console.log('1=====');
-    console.log(this.tokenContractAddress);
-    console.log('2+++++');
   }
 
   setPropertyFormData() {
