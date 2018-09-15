@@ -1,7 +1,7 @@
 {
   "public": {
     "env": "NODE_ENV",
-    "apiEndpoint": "API_ENDPOINT",
+    "apiEndpoint": "apiEndpoint",
     "sentryDSN": "SENTRY_DSN",
     "serverLogUrl": "SERVER_LOG_URL",
     "intercomAppId": "INTERCOM_APP_ID",
