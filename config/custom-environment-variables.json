@@ -1,0 +1,16 @@
+{
+  "public": {
+    "env": "NODE_ENV",
+    "apiEndpoint": "API_ENDPOINT",
+    "sentryDSN": "SENTRY_DSN",
+    "serverLogUrl": "SERVER_LOG_URL",
+    "intercomAppId": "INTERCOM_APP_ID",
+    "mixpanelToken": "MIXPANEL_TOKEN",
+    "gaTrackingId": "GA_TRACKING_ID",
+    "ropstenURL": "ropstenURL",
+    "contractAddress": "contractAddress"
+  },
+  "www": {
+    "port": "PORT"
+  }
+}

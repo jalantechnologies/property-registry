@@ -2,9 +2,13 @@
   "name": "boilerplate-angular",
   "scripts": {},
   "env": {
+    "NODE_ENV": {
+      "description": "Node environment. node_modules packages can alter their behaviour when in production. Heroku will prune devPackages when in production.",
+      "value": "production"
+    },
     "NODE_CONFIG_ENV": {
-      "description": "Realm for loading config entries. Defaults to env.",
-      "value": "env"
+      "description": "Realm for loading config entries.",
+      "required": true
     },
     "contractAddress": {
       "required": true

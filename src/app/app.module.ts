@@ -105,7 +105,5 @@ export class AppModule {
     // mixpanel.init(CONFIG.mixpanelToken);
     // for initializing google analytics
     // ga('create', CONFIG.gaTrackingId, 'auto');
-    // for initializing intercom
-    // IntercomService.boot(userParams);
   }
 }
