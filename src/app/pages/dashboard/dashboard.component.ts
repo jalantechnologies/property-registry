@@ -40,19 +40,19 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  setPropertyFormData() {
+  setPropertyFormData(ownerWalletAddress) {
     this.propertyTokenForm = new FormGroup({
       propertyAddress: new FormControl('', [Validators.required]),
       ownerName: new FormControl('', [Validators.required]),
       ownerEmail: new FormControl('', [Validators.required, Validators.email]),
-      ownerWalletAddress: new FormControl('', [Validators.required]),
+      ownerWalletAddress: new FormControl({value: ownerWalletAddress ? ownerWalletAddress : '', disabled: true}, [Validators.required]),
     });
   }
 
   createPropertyTokenFormData(content) {
     this.contractService.getAccount().then(account => {
       this.metamaskAccount = account;
-      this.setPropertyFormData();
+      this.setPropertyFormData(account);
       this.modalRef = this.modalService.open(content, {centered: true});
     });
   }

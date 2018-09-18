@@ -20,7 +20,7 @@ export class ContractsService {
       // Use MetaMask's provider
       this._web3 = new Web3(window.web3.currentProvider);
     } else {
-      alert('Please use a dapp browser MetaMask plugin for chrome');
+      alert('Please install or login to your Metamask account to continue.');
     }
     if (this._account == null) {
       this._account = await new Promise((resolve, reject) => {
@@ -31,7 +31,7 @@ export class ContractsService {
           }
           if (accs.length === 0) {
             alert(
-              'Couldn\'t get any accounts! Make sure your Ethereum client is configured correctly.'
+              'Please install or login to your Metamask account to continue.'
             );
             return;
           }
@@ -49,7 +49,7 @@ export class ContractsService {
       // Use MetaMask's provider
       this._web3 = new Web3(window.web3.currentProvider);
     } else {
-      alert('Please use a dapp browser MetaMask plugin for chrome');
+      alert('Please install or login to your Metamask account to continue.');
     }
     if (this._web3) {
       const p = new Promise<any>((resolve, reject) => {

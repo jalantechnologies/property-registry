@@ -1,4 +1,15 @@
-.mat-autocomplete-panel {
-  width: 370px !important;
-  margin-left: 364px;
+@media screen and (max-width: 1500px) {
+  .mat-autocomplete-panel {
+    margin-left: 128%;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .mat-autocomplete-panel {
+    margin-left: 120%;
+  }
+}
+@media screen and (max-width: 1280px) {
+  .mat-autocomplete-panel {
+    margin-left: 98%;
+  }
 }
