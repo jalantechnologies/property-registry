@@ -1,15 +1,17 @@
-@media screen and (max-width: 1500px) {
-  .mat-autocomplete-panel {
-    margin-left: 128%;
-  }
+.cdk-overlay-pane {
+  margin: 0 auto;
 }
-@media screen and (max-width: 1440px) {
-  .mat-autocomplete-panel {
-    margin-left: 120%;
-  }
+.input-group-addon {
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1;
+  color: #555;
+  text-align: center;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
-@media screen and (max-width: 1280px) {
-  .mat-autocomplete-panel {
-    margin-left: 98%;
-  }
+.mat-autocomplete-panel {
+  margin-left: -19px;
 }

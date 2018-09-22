@@ -4,12 +4,10 @@
   <div class="clearfix"></div>
   <br/><br/>
   <div class="row">
-    <div class="col-sm-3"></div>
-    <input class="col-sm-4" type="text"
-           matInput
-           [formControl]="searchProperty"
-           [matAutocomplete]="auto">
-    <div class="col-sm-2"><button type="button" class="btn btn-primary float-right" (click)="searchPropertyAddress('')">Search Property</button></div>
+    <div class="input-group col-sm-4" style="margin: 0 auto;">
+      <input class="form-control" type="text" placeholder="Search property" matInput [formControl]="searchProperty" [matAutocomplete]="auto">
+      <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+    </div>
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)='searchPropertyAddress($event.option.value)' class="autocomplete">
       <mat-option *ngFor="let address of propertyAddresses" [value]="address" class="col-sm-4 demo">
         {{ address }}
