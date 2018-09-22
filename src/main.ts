@@ -5,7 +5,7 @@ import {AppModule} from './app/app.module';
 // @ts-ignore
 import CONFIG from '@config';
 
-if (CONFIG.production) {
+if (CONFIG.env === 'production') {
   enableProdMode();
 }
 

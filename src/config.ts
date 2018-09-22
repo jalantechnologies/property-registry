@@ -1,6 +1,6 @@
 // typing implementation of CONFIG to make it work with AOT
 declare const CONFIG: {
-  production: boolean,
+  env: string,
   apiEndpoint: string,
   sentryDSN: string,
   serverLogUrl: string,

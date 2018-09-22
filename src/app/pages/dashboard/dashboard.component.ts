@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {ContractsService} from '@services/contract.service';
@@ -11,7 +11,8 @@ import {PropertyService} from '@services/property.service';
   templateUrl: './dashboard.component.html',
   styleUrls: [
     './dashboard.component.css'
-  ]
+  ],
+  encapsulation: ViewEncapsulation.None,
 })
 
 export class DashboardComponent implements OnInit {
@@ -19,32 +20,41 @@ export class DashboardComponent implements OnInit {
   modalRef: NgbModalRef;
   tokenContractAddress = CONFIG.contractAddress;
   metamaskAccount: any;
-  propertyDetails: any;
   propertyCreationViewState = new ViewStateModel();
+  propertyAddresses = [];
+  searchProperty: FormControl = new FormControl();
 
   constructor(private modalService: NgbModal, private contractService: ContractsService, private router: Router,
               private propertyService: PropertyService) {
-    this.propertyDetails = JSON.parse(localStorage.getItem('propertyDetails'));
   }
 
   ngOnInit() {
-    this.contractService.getAccount().then(account => {
-      this.metamaskAccount = account;
-    });
+    this.searchProperty.valueChanges.subscribe(
+      propertyAddress => {
+        if (propertyAddress !== '') {
+          this.propertyService.getPropertyAddress(propertyAddress).subscribe(
+            data => {
+              this.propertyAddresses = data as any[];
+            });
+        }
+      });
   }
 
-  setPropertyFormData() {
+  setPropertyFormData(ownerWalletAddress) {
     this.propertyTokenForm = new FormGroup({
       propertyAddress: new FormControl('', [Validators.required]),
       ownerName: new FormControl('', [Validators.required]),
       ownerEmail: new FormControl('', [Validators.required, Validators.email]),
-      ownerWalletAddress: new FormControl('', [Validators.required]),
+      ownerWalletAddress: new FormControl({value: ownerWalletAddress ? ownerWalletAddress : '', disabled: true}, [Validators.required]),
     });
   }
 
   createPropertyTokenFormData(content) {
-    this.setPropertyFormData();
-    this.modalRef = this.modalService.open(content, {centered: true});
+    this.contractService.getAccount().then(account => {
+      this.metamaskAccount = account;
+      this.setPropertyFormData(account);
+      this.modalRef = this.modalService.open(content, {centered: true});
+    });
   }
 
   createPropertyToken(formData) {
@@ -61,5 +71,10 @@ export class DashboardComponent implements OnInit {
     }).catch(err => {
       this.propertyCreationViewState.finishedWithError();
     });
+  }
+
+  searchPropertyAddress(address) {
+    address = address ? address : this.searchProperty.value;
+    this.router.navigate(['/property-detail', address]);
   }
 }

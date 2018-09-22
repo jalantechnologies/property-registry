@@ -1,6 +1,19 @@
 <div class="container-fluid">
   <h1 class="float-left">{{ 'DASHBOARD_TITLE' | translate }}</h1>
   <p class="float-right"><button type="button" class="btn btn-primary btn-sm btn-block" (click)="createPropertyTokenFormData(createPropertyTokenModal)">{{ 'DASHBOARD_CREATE_PROPERTY_TOKEN_BUTTON' | translate }}</button></p>
+  <div class="clearfix"></div>
+  <br/><br/>
+  <div class="row">
+    <div class="input-group col-sm-4" style="margin: 0 auto;">
+      <input class="form-control" type="text" placeholder="Search property" matInput [formControl]="searchProperty" [matAutocomplete]="auto">
+      <span class="input-group-addon"><a (click)="searchPropertyAddress('')"><i class="fa fa-search" aria-hidden="true"></i></a></span>
+    </div>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)='searchPropertyAddress($event.option.value)' class="autocomplete">
+      <mat-option *ngFor="let address of propertyAddresses" [value]="address" class="col-sm-4 demo">
+        {{ address }}
+      </mat-option>
+    </mat-autocomplete>
+  </div>
 </div>
 <ng-template #createPropertyTokenModal>
   <div class="modal-header">
@@ -33,7 +46,7 @@
       <div class="form-row">
         <div class="form-group col">
           <label for="ownerWalletAddress">{{ 'CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS' | translate}}</label>
-          <input type="text" class="form-control" id="ownerWalletAddress" formControlName='ownerWalletAddress' placeholder="{{ 'CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS' | translate}}*" [ngClass]="{'is-invalid': propertyTokenForm.controls.ownerWalletAddress?.errors && propertyTokenForm.controls.ownerWalletAddress?.dirty}" [attr.disabled]='propertyCreationViewState.isLoading ? "" : null'>
+          <input type="text" class="form-control" id="ownerWalletAddress" formControlName='ownerWalletAddress' placeholder="{{ 'CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS' | translate}}*" [ngClass]="{'is-invalid': propertyTokenForm.controls.ownerWalletAddress?.errors && propertyTokenForm.controls.ownerWalletAddress?.dirty}">
           <div class="invalid-feedback" *ngIf="propertyTokenForm.controls.ownerWalletAddress.errors && propertyTokenForm.controls.ownerWalletAddress.dirty">{{ 'CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS_REQUIRED_ERROR' | translate }}</div>
         </div>
       </div>
