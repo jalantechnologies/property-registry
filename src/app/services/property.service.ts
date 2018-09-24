@@ -28,4 +28,8 @@ export class PropertyService {
     return this.httpClient.get<any>(`${CONFIG.apiEndpoint}property?q=${propertyAddress}`, this.getAuthHeaders());
   }
 
+  public downloadSignedDeed(deedURL): Observable<any> {
+    return this.httpClient.get<any>(`${CONFIG.apiEndpoint}property/download_signed_deed/${deedURL}`, this.getAuthHeaders());
+  }
+
 }

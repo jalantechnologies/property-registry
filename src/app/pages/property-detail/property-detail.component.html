@@ -25,11 +25,11 @@
     </tr>
     <tr>
       <th>{{ 'CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS' | translate }}</th>
-      <td><a href="{{ropstenURL}}{{currentOwnerDetail.ownerWalletAddress}}">{{currentOwnerDetail.ownerWalletAddress}}</a></td>
+      <td><a href="{{ropstenURL}}{{currentOwnerDetail.ownerWalletAddress}}" target="_blank">{{currentOwnerDetail.ownerWalletAddress}}</a></td>
     </tr>
     <tr>
       <th>{{ 'CREATE_PROPERTY_TOKEN_DEED_URL' | translate }}</th>
-      <td>{{currentOwnerDetail.deedURL}}</td>
+      <td><a (click)="openDeedDocument(currentOwnerDetail.deedURL)" style="color: #007bff; text-decoration-line: underline; cursor: pointer;">{{currentOwnerDetail.deedURL}}</a></td>
     </tr>
   </table>
   <h6 class="alert alert-danger" *ngIf="propertyDetailsViewState.isFinishedWithError">{{ 'INVALID_PROPERTY_ADDRESS_ERROR' | translate }}</h6>
@@ -52,11 +52,11 @@
         </tr>
         <tr>
           <th>{{ 'CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS' | translate }}</th>
-          <td><a href="{{ropstenURL}}{{propertyDetail.ownerWalletAddress}}">{{propertyDetail.ownerWalletAddress}}</a></td>
+          <td><a href="{{ropstenURL}}{{propertyDetail.ownerWalletAddress}}" target="_blank">{{propertyDetail.ownerWalletAddress}}</a></td>
         </tr>
         <tr>
           <th>{{ 'CREATE_PROPERTY_TOKEN_DEED_URL' | translate }}</th>
-          <td>{{propertyDetail.deedURL}}</td>
+          <td><a (click)="openDeedDocument(propertyDetail.deedURL)" style="color: #007bff; text-decoration-line: underline; cursor: pointer;">{{propertyDetail.deedURL}}</a></td>
         </tr>
       </table>
     </div>
