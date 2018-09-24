@@ -4,6 +4,7 @@ import {ContractsService} from '@services/contract.service';
 import {ViewStateModel} from '@shared/view-state.model';
 import CONFIG from '@config';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {PropertyService} from '@services/property.service';
 
 @Component({
   templateUrl: './property-detail.component.html',
@@ -23,7 +24,8 @@ export class PropertyDetailComponent implements OnInit {
   previousOwnerExist = false;
   historyViewState = new ViewStateModel();
 
-  constructor(private route: ActivatedRoute, private contractService: ContractsService, private modalService: NgbModal) {}
+  constructor(private route: ActivatedRoute, private contractService: ContractsService, private modalService: NgbModal,
+              private propertyService: PropertyService) {}
 
   ngOnInit() {
     this.propertyAddress = this.route.snapshot.paramMap.get('propertyAddress');
@@ -57,13 +59,26 @@ export class PropertyDetailComponent implements OnInit {
           propertyAddress: propertyAddress,
           index: index
         };
-        if (currentOwner) {
-          this.previousOwnerExist = !!response[4];
-          this.currentOwnerDetail = detail;
-          this.propertyDetailsViewState.finishedWithSuccess();
+        if (detail.deedURL) {
+          this.propertyService.downloadSignedDeed(detail.deedURL).subscribe(res => {
+            if (currentOwner) {
+              this.previousOwnerExist = !!response[4];
+              this.currentOwnerDetail = detail;
+              this.propertyDetailsViewState.finishedWithSuccess();
+            } else {
+              this.propertyDetail = detail;
+              this.historyViewState.finishedWithSuccess();
+            }
+          });
         } else {
-          this.propertyDetail = detail;
-          this.historyViewState.finishedWithSuccess();
+          if (currentOwner) {
+            this.previousOwnerExist = !!response[4];
+            this.currentOwnerDetail = detail;
+            this.propertyDetailsViewState.finishedWithSuccess();
+          } else {
+            this.propertyDetail = detail;
+            this.historyViewState.finishedWithSuccess();
+          }
         }
       } else {
         this.propertyDetailsViewState.finishedWithError();
@@ -75,5 +90,10 @@ export class PropertyDetailComponent implements OnInit {
         this.historyViewState.finishedWithError();
       }
     });
+  }
+
+  openDeedDocument(envelopeId) {
+    const URL = `${CONFIG.apiEndpoint}signedDeed/${envelopeId}.pdf`;
+    window.open(URL);
   }
 }
