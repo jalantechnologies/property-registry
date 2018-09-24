@@ -3,13 +3,14 @@ import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Http} from '@angular/http';
 import CONFIG from '@config';
+import {ApiService} from '@services/api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class PropertyService {
-  constructor(private httpClient: HttpClient) {
+  constructor(private apiService: ApiService) {
   }
 
   public getAuthHeaders() {
@@ -21,15 +22,15 @@ export class PropertyService {
   }
 
   public storePropertyAddress(data): Observable<any> {
-    return this.httpClient.post<any>(`${CONFIG.apiEndpoint}property`, data, this.getAuthHeaders());
+    return this.apiService.request(ApiService.Methods.POST, 'property', data);
   }
 
   public getPropertyAddress(propertyAddress): Observable<any> {
-    return this.httpClient.get<any>(`${CONFIG.apiEndpoint}property?q=${propertyAddress}`, this.getAuthHeaders());
+    return this.apiService.request(ApiService.Methods.GET, `property?q=${propertyAddress}`);
   }
 
   public downloadSignedDeed(deedURL): Observable<any> {
-    return this.httpClient.get<any>(`${CONFIG.apiEndpoint}property/download_signed_deed/${deedURL}`, this.getAuthHeaders());
+    return this.apiService.request(ApiService.Methods.GET, `property/download_signed_deed/${deedURL}`);
   }
 
 }
