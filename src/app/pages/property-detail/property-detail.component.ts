@@ -19,7 +19,6 @@ export class PropertyDetailComponent implements OnInit {
   currentOwnerDetail: any;
   tokenContractAddress = CONFIG.contractAddress;
   propertyDetailsViewState = new ViewStateModel();
-  ropstenURL = CONFIG.ropstenURL;
   modalRef: NgbModalRef;
   previousOwnerExist = false;
   historyViewState = new ViewStateModel();

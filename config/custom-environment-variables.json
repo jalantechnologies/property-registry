@@ -8,7 +8,8 @@
     "mixpanelToken": "MIXPANEL_TOKEN",
     "gaTrackingId": "GA_TRACKING_ID",
     "ropstenURL": "ropstenURL",
-    "contractAddress": "contractAddress"
+    "contractAddress": "contractAddress",
+    "blockchainAPIURL": "blockchainAPIURL"
   },
   "www": {
     "port": "PORT"

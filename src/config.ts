@@ -8,7 +8,8 @@ declare const CONFIG: {
   mixpanelToken: string,
   gaTrackingId: string,
   ropstenURL: string,
-  contractAddress: string
+  contractAddress: string,
+  blockchainAPIURL: string
 };
 
 export default CONFIG;

@@ -19,7 +19,6 @@ export class DashboardComponent implements OnInit {
   propertyTokenForm: FormGroup;
   modalRef: NgbModalRef;
   tokenContractAddress = CONFIG.contractAddress;
-  metamaskAccount: any;
   propertyCreationViewState = new ViewStateModel();
   propertyAddresses = [];
   searchProperty: FormControl = new FormControl();
@@ -45,15 +44,16 @@ export class DashboardComponent implements OnInit {
       propertyAddress: new FormControl('', [Validators.required]),
       ownerName: new FormControl('', [Validators.required]),
       ownerEmail: new FormControl('', [Validators.required, Validators.email]),
-      ownerWalletAddress: new FormControl({value: ownerWalletAddress ? ownerWalletAddress : '', disabled: true}, [Validators.required]),
+      ownerWalletAddress: new FormControl(ownerWalletAddress ? ownerWalletAddress : '', [Validators.required]),
     });
   }
 
   createPropertyTokenFormData(content) {
     this.contractService.getAccount().then(account => {
-      this.metamaskAccount = account;
       this.setPropertyFormData(account);
       this.modalRef = this.modalService.open(content, {centered: true});
+    }, err => {
+      alert(err.message);
     });
   }
 
@@ -61,15 +61,13 @@ export class DashboardComponent implements OnInit {
     this.propertyCreationViewState.load();
     this.contractService.createProperty(this.tokenContractAddress, formData.ownerWalletAddress, formData.propertyAddress,
       formData.ownerName, formData.ownerEmail).then(res => {
-      if (res) {
         this.propertyService.storePropertyAddress(res).subscribe(response => {
           this.router.navigate(['/property-detail', response.propertyAddress]);
         });
         this.modalRef.close();
         this.propertyCreationViewState.finishedWithSuccess();
-      }
     }).catch(err => {
-      this.propertyCreationViewState.finishedWithError();
+      this.propertyCreationViewState.finishedWithError(err);
     });
   }
 
