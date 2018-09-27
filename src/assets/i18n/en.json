@@ -1,6 +1,6 @@
 {
   "DASHBOARD_TITLE": "Dashboard",
-  "DASHBOARD_CREATE_PROPERTY_TOKEN_BUTTON": "Create Property Token",
+  "DASHBOARD_CREATE_PROPERTY_TOKEN_BUTTON": "Claim your property token now!",
   "AGREEMENT_FORM_HEADING_PROPERTY_ADDRESS": "Property Address",
   "AGREEMENT_FORM_PROPERTY_ADDRESS_REQUIRED_ERROR": "Please enter property address",
   "CREATE_PROPERTY_TOKEN_OWNER_NAME": "Owner Name",
@@ -18,7 +18,7 @@
   "CREATE_PROPERTY_TOKEN_DEED_URL": "Deed URL",
   "PREVIOUS": "Previous",
   "NEXT": "Next",
-  "PROPERTY_DETAIL_PAGE": "Property Detail Page",
+  "PROPERTY_DETAIL_PAGE": "Property Detail",
   "VIEW_PREVIOUS_OWNERS": "View previous owners",
   "TITLE_HISTORY": "Title History",
   "METAMASK_TRANSACTION_REJECTED_ERROR": "You rejected the transaction on Metamask!"
