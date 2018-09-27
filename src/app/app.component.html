@@ -1,7 +1,14 @@
-<app-navbar></app-navbar>
-<div class="container container-fluid container-body">
-  <main role="main">
-    <router-outlet></router-outlet>
-  </main>
+<div id="root">
+  <app-navbar></app-navbar>
+  <div class="container">
+    <div class='row'>
+      <div class='col-12'>
+        <main role="main">
+          <router-outlet></router-outlet>
+        </main>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
 </div>
-<app-footer></app-footer>
+

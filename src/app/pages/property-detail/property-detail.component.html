@@ -1,7 +1,6 @@
+<h1>{{ 'PROPERTY_DETAIL_PAGE' | translate }}</h1>
+<br/><br/><br/><br/>
 <div class="container-fluid col-sm-8">
-  <h5>
-    {{ 'PROPERTY_DETAIL_PAGE' | translate }}
-  </h5><br/>
   <div class="row" *ngIf="(currentOwnerDetail | json) != '{}'">
     <div class="col-sm-4">
       <img src="../../../assets/images/property_image.png" width="100" />
@@ -65,6 +64,6 @@
       <button type="button" class="btn btn-primary" (click)="getDeedHistory(propertyDetail.propertyAddress, propertyDetail.index-1)" [attr.disabled]='historyViewState.isLoading || !propertyDetail.previousIndexExist ? "" : null'>{{ 'NEXT' | translate }}</button>
     </div>
   </ng-template>
-  <button *ngIf="(currentOwnerDetail | json) != '{}'" type="button" class="btn btn-sm btn-outline-secondary float-right" (click)="openDeedHistoryModal(deedHistoryModal, propertyAddress, 2)" [attr.disabled]='propertyDetailsViewState.isLoading || !previousOwnerExist ? "" : null'>{{ 'VIEW_PREVIOUS_OWNERS' | translate }}</button>
+  <button *ngIf="(currentOwnerDetail | json) != '{}'" type="button" class="btn btn-outline-primary btn-sm float-right" (click)="openDeedHistoryModal(deedHistoryModal, propertyAddress, 2)" [attr.disabled]='propertyDetailsViewState.isLoading || !previousOwnerExist ? "" : null'>{{ 'VIEW_PREVIOUS_OWNERS' | translate }}</button>
 </div>
 <div class="clearfix"></div>
