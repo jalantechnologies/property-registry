@@ -15,7 +15,7 @@ export class ContractsService {
   public async getAccount(): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       if (typeof window.web3 !== 'undefined') {
-        var web3 = new Web3(window.web3.currentProvider);
+        const web3 = new Web3(window.web3.currentProvider);
         web3.eth.getAccounts((err, accs) => {
           if (err) {
             reject(err);
@@ -26,8 +26,7 @@ export class ContractsService {
             reject(new Error('Please login to your Metamask and select one account to continue.'));
             return;
           }
-          
-          var account = accs[0];
+          const account = accs[0];
           resolve(account);
         });
       } else {
@@ -39,7 +38,7 @@ export class ContractsService {
   public async createProperty(contractAddress, walletAddress, propertyAddress, ownerName, ownerEmail): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (typeof window.web3 !== 'undefined') {
-        var web3 = new Web3(window.web3.currentProvider);
+        const web3 = new Web3(window.web3.currentProvider);
         web3.eth.defaultAccount = walletAddress;
         const contractInstance = web3.eth.contract(tokenAbi).at(contractAddress);
         contractInstance.createProperty(walletAddress, propertyAddress, ownerName, ownerEmail, (error, result) => {
@@ -63,7 +62,7 @@ export class ContractsService {
 
   public async getPropertyOwnerDetails(contractAddress, propertyAddress, index): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      var web3 = new Web3(new Web3.providers.HttpProvider(CONFIG.blockchainAPIURL));
+      const web3 = new Web3(new Web3.providers.HttpProvider(CONFIG.blockchainAPIURL));
       const contractInstance = web3.eth.contract(tokenAbi).at(contractAddress);
       contractInstance.getPropertyOwnerDetails(propertyAddress, index, (error, result) => {
         if (!error) {
