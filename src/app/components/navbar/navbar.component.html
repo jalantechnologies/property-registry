@@ -2,4 +2,38 @@
   <div class="nav-group header-group">
     <a class="nav-item  header-item-logo" href="/"> Proptoken</a>
   </div>
+  <div class="nav-group header-group">
+    <a class="label label-success" (click)="launchEnterpriseInfoModal(enterpriseInfoModal)"> Proptoken Enterprise</a>
+  </div>
 </nav>
+<ng-template #enterpriseInfoModal>
+  <div class="modal-body">
+    <br/>
+    <h3 class='text-center'>Close property like a pro</h3>
+    <br/>
+    <p class='text-center'>Do you help buyers or sellers to finish their real estate transaction?</p>
+    <p>Proptoken is a global registry of real estate properties. Unlike many similar solutions, proptoken stores property details and ownership history on blockchain which is available 24x7 and cannot be corrupted.</p>
+    <div class='container'>
+      <br/>
+      <div class='row'>
+        <div class='col-lg-6'>
+          <img src='/assets/images/deed.png' width='100%' />
+        </div>
+        <div class='col-lg-6'>
+          <h5>Search ownership records quickly</h5>
+          <p>Proptoken records all previous owner along with deeds of a property on blockchain and makes it available quickly and accurately.</p>
+          <br/><br/>
+          <h5>Online deed generation and e-closing</h5>
+          <p>Trigger documents and get e-signature from all stakeholders to complete the transaction within minutes.</p>
+        </div>
+      </div>
+      <br/><br/>
+      <div class='text-center'>
+        Interested?
+        <br/>
+        Reach out to us for a demo at <a href='mailto:enterprise@proptoken.io'>enterprise@proptoken.io</a>
+      </div>
+      <br/><br/>
+    </div>
+  </div>
+</ng-template>
