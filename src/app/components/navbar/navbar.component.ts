@@ -10,10 +10,10 @@ import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
-  
+
   constructor(private modalService: NgbModal) {
   }
-  
+
   launchEnterpriseInfoModal(content) {
     this.modalService.open(content, {centered: true, size: 'lg'});
   }
