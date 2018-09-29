@@ -56,6 +56,7 @@ export class DashboardComponent implements OnInit {
   }
 
   createPropertyTokenFormData(content) {
+    this.showAddressVerificationScreen = false;
     this.contractService.getAccount().then(account => {
       this.setPropertyFormData(account);
       this.modalRef = this.modalService.open(content, {centered: true});
@@ -77,6 +78,8 @@ export class DashboardComponent implements OnInit {
     this.propertyService.verifyAddress(propertyAddress).subscribe(response => {
       this.standardisedPropertyAddress = response;
       this.verifyingPropertyAddress.finishedWithSuccess();
+    }, error => {
+      this.verifyingPropertyAddress.finishedWithError(error);
     });
   }
 
