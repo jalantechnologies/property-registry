@@ -32,7 +32,7 @@
   <br/><br/>
 </div>
 <ng-template #createPropertyTokenModal>
-  <div class="modal-header">
+  <div class="modal-header" *ngIf="!showAddressVerificationScreen">
     <h5>{{ 'DASHBOARD_CREATE_PROPERTY_TOKEN_BUTTON' | translate }}</h5>
   </div>
   <div class="modal-body">
@@ -90,21 +90,25 @@
           <div class="invalid-feedback" *ngIf="propertyTokenForm.controls.ownerWalletAddress.errors && propertyTokenForm.controls.ownerWalletAddress.dirty">{{ 'CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS_REQUIRED_ERROR' | translate }}</div>
         </div>
       </div>
-      <div class="alert alert-success" *ngIf="propertyCreationViewState.isLoading"><i class="fa fa-spinner fa-spin" *ngIf='propertyCreationViewState.isLoading' style="font-size: 20px;"></i> {{ 'CREATE_PROPERTY_TOKEN_WAITING_DIALOGUE' | translate }}</div>
-      <div class="alert alert-danger" *ngIf="propertyCreationViewState.isFinishedWithError && !propertyCreationViewState.isLoading">{{ 'METAMASK_TRANSACTION_REJECTED_ERROR' | translate }}</div>
       <button type="button" class="btn btn-primary" (click)="verifyAddress(propertyTokenForm.value)" [disabled]="!propertyTokenForm.valid || propertyCreationViewState.isLoading">
         <span *ngIf="!propertyCreationViewState.isLoading">{{ 'SIGNIN_FORM_SAVE_BUTTON' | translate }} </span>
         <span *ngIf="propertyCreationViewState.isLoading">{{ 'SAVING' | translate }} </span>
       </button>
       </span>
+
       <span *ngIf="showAddressVerificationScreen">
         <h5 *ngIf="verifyingPropertyAddress.isLoading">Checking Address</h5>
-        <button type="button" class="btn btn-primary" [disabled]="!propertyTokenForm.valid || propertyCreationViewState.isLoading">Cancel
-        </button>
-        <button type="submit" class="btn btn-primary" [disabled]="!propertyTokenForm.valid || propertyCreationViewState.isLoading">
-          <span *ngIf="!propertyCreationViewState.isLoading">{{ 'SIGNIN_FORM_SAVE_BUTTON' | translate }} </span>
-          <span *ngIf="propertyCreationViewState.isLoading">{{ 'SAVING' | translate }} </span>
-        </button>
+        <h5 *ngIf="!verifyingPropertyAddress.isLoading">Standardised Address:</h5>
+        <p *ngIf="standardisedPropertyAddress">{{standardisedPropertyAddress}}</p>
+        <div class="alert alert-success" *ngIf="propertyCreationViewState.isLoading"><i class="fa fa-spinner fa-spin" *ngIf='propertyCreationViewState.isLoading' style="font-size: 20px;"></i> {{ 'CREATE_PROPERTY_TOKEN_WAITING_DIALOGUE' | translate }}</div>
+          <div class="alert alert-danger" *ngIf="propertyCreationViewState.isFinishedWithError && !propertyCreationViewState.isLoading">{{ 'METAMASK_TRANSACTION_REJECTED_ERROR' | translate }}</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="cancelAddressVerification()">Cancel</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!propertyTokenForm.valid || propertyCreationViewState.isLoading">
+            <span *ngIf="!propertyCreationViewState.isLoading">Accept</span>
+            <span *ngIf="propertyCreationViewState.isLoading">Accepting</span>
+          </button>
+        </div>
       </span>
     </form>
   </div>

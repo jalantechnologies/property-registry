@@ -80,6 +80,12 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  cancelAddressVerification() {
+    this.verifyingPropertyAddress.finishedWithSuccess();
+    this.standardisedPropertyAddress = '';
+    this.showAddressVerificationScreen = false;
+  }
+
   createPropertyToken(formData) {
     this.propertyCreationViewState.load();
     this.contractService.createProperty(this.tokenContractAddress, formData.ownerWalletAddress, this.standardisedPropertyAddress,
