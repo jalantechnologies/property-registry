@@ -21,5 +21,19 @@
   "PROPERTY_DETAIL_PAGE": "Property Detail",
   "VIEW_PREVIOUS_OWNERS": "View previous owners",
   "TITLE_HISTORY": "Title History",
-  "METAMASK_TRANSACTION_REJECTED_ERROR": "You rejected the transaction on Metamask!"
+  "METAMASK_TRANSACTION_REJECTED_ERROR": "You rejected the transaction on Metamask!",
+  "STREET": "Street",
+  "CITY": "City",
+  "STATE": "State",
+  "ZIP_CODE": "Zip Code",
+  "STREET_REQUIRED_ERROR": "Please enter street1",
+  "CITY_REQUIRED_ERROR": "Please enter city",
+  "STATE_REQUIRED_ERROR": "Please enter state",
+  "ZIP_CODE_REQUIRED_ERROR": "Please enter zip code",
+  "CHECKING_ADDRESS": "Checking Address",
+  "STANDARDISED_ADDRESS": "Standardised Address",
+  "PROPERTY_ADDRESS_INVALID_ERROR": "Please enter valid property address",
+  "ACCEPT": "Accept",
+  "ACCEPTING": "Accepting",
+  "CANCEL": "Cancel"
 }

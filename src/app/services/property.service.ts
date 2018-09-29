@@ -33,4 +33,8 @@ export class PropertyService {
     return this.apiService.request(ApiService.Methods.GET, `property/download_signed_deed/${deedURL}`);
   }
 
+  public verifyAddress(data): Observable<any> {
+    return this.apiService.request(ApiService.Methods.POST, 'property/verify_address', data);
+  }
+
 }

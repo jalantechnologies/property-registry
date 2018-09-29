@@ -33,45 +33,83 @@
 </div>
 <ng-template #createPropertyTokenModal>
   <div class="modal-header">
-    <h5>{{ 'DASHBOARD_CREATE_PROPERTY_TOKEN_BUTTON' | translate }}</h5>
+    <h5 *ngIf="!showAddressVerificationScreen">{{ 'DASHBOARD_CREATE_PROPERTY_TOKEN_BUTTON' | translate }}</h5>
+    <h5 *ngIf="verifyingPropertyAddress.isFinishedWithError">Error</h5>
+    <h5 *ngIf="verifyingPropertyAddress.isFinishedWithSuccess && showAddressVerificationScreen">Confirm</h5>
+    <h5 *ngIf="verifyingPropertyAddress.isLoading">{{ 'CHECKING_ADDRESS' | translate}}</h5>
   </div>
   <div class="modal-body">
     <form [formGroup]="propertyTokenForm" (ngSubmit)='createPropertyToken(propertyTokenForm.value)'>
-      <div class="form-row">
-        <div class="form-group col">
-          <label for="propertyAddress">{{ 'AGREEMENT_FORM_HEADING_PROPERTY_ADDRESS' | translate}}</label>
-          <input type="text" class="form-control" id="propertyAddress" formControlName='propertyAddress' placeholder="{{ 'AGREEMENT_FORM_HEADING_PROPERTY_ADDRESS' | translate}}*" [ngClass]="{'is-invalid': propertyTokenForm.controls.propertyAddress?.errors && propertyTokenForm.controls.propertyAddress?.dirty}" [attr.disabled]='propertyCreationViewState.isLoading ? "" : null'>
-          <div class="invalid-feedback" *ngIf="propertyTokenForm.controls.propertyAddress.errors && propertyTokenForm.controls.propertyAddress.dirty">{{ 'AGREEMENT_FORM_PROPERTY_ADDRESS_REQUIRED_ERROR' | translate }}</div>
+      <div *ngIf="!showAddressVerificationScreen">
+        <div class="form-row">
+          <div class="form-group col">
+            <label for="street1">{{ 'STREET' | translate}}1</label>
+            <input type="text" class="form-control" id="street1" formControlName='street1' placeholder="{{ 'STREET' | translate}}1*" [ngClass]="{'is-invalid': propertyTokenForm.controls.street1?.errors && propertyTokenForm.controls.street1?.dirty}" [attr.disabled]='propertyCreationViewState.isLoading ? "" : null'>
+            <div class="invalid-feedback" *ngIf="propertyTokenForm.controls.street1.errors && propertyTokenForm.controls.street1.dirty">{{ 'STREET_REQUIRED_ERROR' | translate }}</div>
+          </div>
+          <div class="form-group col">
+            <label for="street2">{{ 'STREET' | translate}}2</label>
+            <input type="text" class="form-control" id="street2" formControlName='street2' placeholder="{{ 'STREET' | translate}}2" [attr.disabled]='propertyCreationViewState.isLoading ? "" : null'>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col">
+            <label for="zipCode">{{ 'ZIP_CODE' | translate}}</label>
+            <input type="text" class="form-control" id="zipCode" formControlName='zipCode' placeholder="{{ 'ZIP_CODE' | translate}}*" [ngClass]="{'is-invalid': propertyTokenForm.controls.zipCode?.errors && propertyTokenForm.controls.zipCode?.dirty}" [attr.disabled]='propertyCreationViewState.isLoading ? "" : null'>
+            <div class="invalid-feedback" *ngIf="propertyTokenForm.controls.zipCode.errors && propertyTokenForm.controls.zipCode.dirty">{{ 'ZIP_CODE_REQUIRED_ERROR' | translate }}</div>
+          </div>
+          <div class="form-group col">
+            <label for="city">{{ 'CITY' | translate}}</label>
+            <input type="text" class="form-control" id="city" formControlName='city' placeholder="{{ 'CITY' | translate}}*" [ngClass]="{'is-invalid': propertyTokenForm.controls.city?.errors && propertyTokenForm.controls.city?.dirty}" [attr.disabled]='propertyCreationViewState.isLoading ? "" : null'>
+            <div class="invalid-feedback" *ngIf="propertyTokenForm.controls.city.errors && propertyTokenForm.controls.city.dirty">{{ 'CITY_REQUIRED_ERROR' | translate }}</div>
+          </div>
+          <div class="form-group col">
+            <label for="state">{{ 'STATE' | translate}}</label>
+            <select class='selectpicker' formControlName="state" id="state" style="height: 36px; background-color: #fff; color: #495057;">
+              <option *ngFor="let state of USStates" value="{{state.value}}">{{state.name}}</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="propertyTokenForm.controls.state.errors && propertyTokenForm.controls.state.dirty">{{ 'STATE_REQUIRED_ERROR' | translate }}</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col">
+            <label for="ownerName">{{ 'CREATE_PROPERTY_TOKEN_OWNER_NAME' | translate}}</label>
+            <input type="text" class="form-control" id="ownerName" formControlName='ownerName' placeholder="{{ 'CREATE_PROPERTY_TOKEN_OWNER_NAME' | translate}}*" [ngClass]="{'is-invalid': propertyTokenForm.controls.ownerName?.errors && propertyTokenForm.controls.ownerName?.dirty}" [attr.disabled]='propertyCreationViewState.isLoading ? "" : null'>
+            <div class="invalid-feedback" *ngIf="propertyTokenForm.controls.ownerName.errors && propertyTokenForm.controls.ownerName.dirty">{{ 'CREATE_PROPERTY_TOKEN_OWNER_NAME_REQUIRED_ERROR' | translate }}</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col">
+            <label for="ownerEmail">{{ 'CREATE_PROPERTY_TOKEN_OWNER_EMAIL' | translate}}</label>
+            <input type="email" class="form-control" id="ownerEmail" formControlName='ownerEmail' placeholder="{{ 'CREATE_PROPERTY_TOKEN_OWNER_EMAIL' | translate}}*" [ngClass]="{'is-invalid': propertyTokenForm.controls.ownerEmail?.errors && propertyTokenForm.controls.ownerEmail?.dirty}" [attr.disabled]='propertyCreationViewState.isLoading ? "" : null'>
+            <div class="invalid-feedback" *ngIf="propertyTokenForm.controls.ownerEmail.errors?.required">{{ 'SIGNIN_FORM_EMAIL_ADDRESS_REQUIRED_ERROR' | translate }}</div>
+            <div class="invalid-feedback" *ngIf="!propertyTokenForm.controls.ownerEmail.errors?.required && propertyTokenForm.controls.ownerEmail.errors?.email">{{ 'SIGNIN_FORM_EMAIL_ADDRESS_PATTERN_ERROR' | translate }}</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col">
+            <label for="ownerWalletAddress">{{ 'CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS' | translate}}</label>
+            <input type="text" class="form-control" id="ownerWalletAddress" formControlName='ownerWalletAddress' placeholder="{{ 'CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS' | translate}}*" [ngClass]="{'is-invalid': propertyTokenForm.controls.ownerWalletAddress?.errors && propertyTokenForm.controls.ownerWalletAddress?.dirty}">
+            <div class="invalid-feedback" *ngIf="propertyTokenForm.controls.ownerWalletAddress.errors && propertyTokenForm.controls.ownerWalletAddress.dirty">{{ 'CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS_REQUIRED_ERROR' | translate }}</div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary" [disabled]="!propertyTokenForm.valid || propertyCreationViewState.isLoading" (click)="verifyAddress(propertyTokenForm.value)">{{ 'SIGNIN_FORM_SAVE_BUTTON' | translate }}</button>
+      </div>
+
+      <div *ngIf="showAddressVerificationScreen">
+        <h5 *ngIf="verifyingPropertyAddress.isLoading"><i class="fa fa-spinner fa-spin" *ngIf='verifyingPropertyAddress.isLoading' style="font-size: 20px;"></i></h5>
+        <p *ngIf="!verifyingPropertyAddress.isLoading && !verifyingPropertyAddress.isFinishedWithError">Are you sure you want to create a token for "<b>{{standardisedPropertyAddress}}</b>"?</p>
+        <h5 *ngIf="verifyingPropertyAddress.isFinishedWithError">{{ 'PROPERTY_ADDRESS_INVALID_ERROR' | translate}}</h5>
+        <div class="alert alert-success" *ngIf="propertyCreationViewState.isLoading"><i class="fa fa-spinner fa-spin" *ngIf='propertyCreationViewState.isLoading' style="font-size: 20px;"></i> {{ 'CREATE_PROPERTY_TOKEN_WAITING_DIALOGUE' | translate }}</div>
+        <div class="alert alert-danger" *ngIf="propertyCreationViewState.isFinishedWithError && !propertyCreationViewState.isLoading">{{ 'METAMASK_TRANSACTION_REJECTED_ERROR' | translate }}</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="cancelAddressVerification()">{{ 'CANCEL' | translate}}</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!propertyTokenForm.valid || propertyCreationViewState.isLoading || verifyingPropertyAddress.isLoading || verifyingPropertyAddress.isFinishedWithError">
+            <span *ngIf="!propertyCreationViewState.isLoading">{{ 'CREATE' | translate}}</span>
+            <span *ngIf="propertyCreationViewState.isLoading">{{ 'CREATING' | translate}}</span>
+          </button>
         </div>
       </div>
-      <div class="form-row">
-        <div class="form-group col">
-          <label for="ownerName">{{ 'CREATE_PROPERTY_TOKEN_OWNER_NAME' | translate}}</label>
-          <input type="text" class="form-control" id="ownerName" formControlName='ownerName' placeholder="{{ 'CREATE_PROPERTY_TOKEN_OWNER_NAME' | translate}}*" [ngClass]="{'is-invalid': propertyTokenForm.controls.ownerName?.errors && propertyTokenForm.controls.ownerName?.dirty}" [attr.disabled]='propertyCreationViewState.isLoading ? "" : null'>
-          <div class="invalid-feedback" *ngIf="propertyTokenForm.controls.ownerName.errors && propertyTokenForm.controls.ownerName.dirty">{{ 'CREATE_PROPERTY_TOKEN_OWNER_NAME_REQUIRED_ERROR' | translate }}</div>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col">
-          <label for="ownerEmail">{{ 'CREATE_PROPERTY_TOKEN_OWNER_EMAIL' | translate}}</label>
-          <input type="email" class="form-control" id="ownerEmail" formControlName='ownerEmail' placeholder="{{ 'CREATE_PROPERTY_TOKEN_OWNER_EMAIL' | translate}}*" [ngClass]="{'is-invalid': propertyTokenForm.controls.ownerEmail?.errors && propertyTokenForm.controls.ownerEmail?.dirty}" [attr.disabled]='propertyCreationViewState.isLoading ? "" : null'>
-          <div class="invalid-feedback" *ngIf="propertyTokenForm.controls.ownerEmail.errors?.required">{{ 'SIGNIN_FORM_EMAIL_ADDRESS_REQUIRED_ERROR' | translate }}</div>
-          <div class="invalid-feedback" *ngIf="!propertyTokenForm.controls.ownerEmail.errors?.required && propertyTokenForm.controls.ownerEmail.errors?.email">{{ 'SIGNIN_FORM_EMAIL_ADDRESS_PATTERN_ERROR' | translate }}</div>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col">
-          <label for="ownerWalletAddress">{{ 'CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS' | translate}}</label>
-          <input type="text" class="form-control" id="ownerWalletAddress" formControlName='ownerWalletAddress' placeholder="{{ 'CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS' | translate}}*" [ngClass]="{'is-invalid': propertyTokenForm.controls.ownerWalletAddress?.errors && propertyTokenForm.controls.ownerWalletAddress?.dirty}">
-          <div class="invalid-feedback" *ngIf="propertyTokenForm.controls.ownerWalletAddress.errors && propertyTokenForm.controls.ownerWalletAddress.dirty">{{ 'CREATE_PROPERTY_TOKEN_OWNER_WALLET_ADDRESS_REQUIRED_ERROR' | translate }}</div>
-        </div>
-      </div>
-      <div class="alert alert-success" *ngIf="propertyCreationViewState.isLoading"><i class="fa fa-spinner fa-spin" *ngIf='propertyCreationViewState.isLoading' style="font-size: 20px;"></i> {{ 'CREATE_PROPERTY_TOKEN_WAITING_DIALOGUE' | translate }}</div>
-      <div class="alert alert-danger" *ngIf="propertyCreationViewState.isFinishedWithError && !propertyCreationViewState.isLoading">{{ 'METAMASK_TRANSACTION_REJECTED_ERROR' | translate }}</div>
-      <button type="submit" class="btn btn-primary" [disabled]="!propertyTokenForm.valid || propertyCreationViewState.isLoading">
-        <span *ngIf="!propertyCreationViewState.isLoading">{{ 'SIGNIN_FORM_SAVE_BUTTON' | translate }} </span>
-        <span *ngIf="propertyCreationViewState.isLoading">{{ 'SAVING' | translate }} </span>
-      </button>
     </form>
   </div>
 </ng-template>
