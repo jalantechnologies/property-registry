@@ -26,7 +26,7 @@ export class PropertyService {
   }
 
   public getPropertyAddress(propertyAddress): Observable<any> {
-    return this.apiService.request(ApiService.Methods.GET, `property?q=${propertyAddress}`);
+    return this.apiService.request(ApiService.Methods.GET, `property/search?q=${propertyAddress}`);
   }
 
   public downloadSignedDeed(deedURL): Observable<any> {
