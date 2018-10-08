@@ -73,4 +73,18 @@ export class ContractsService {
       });
     });
   }
+
+  public async getRecentlyCreatedPropertyAddress1(contractAddress): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      const web3 = new Web3(new Web3.providers.HttpProvider(CONFIG.blockchainAPIURL));
+      const contractInstance = web3.eth.contract(tokenAbi).at(contractAddress);
+      contractInstance.getRecentlyCreatedPropertyAddress((error, result) => {
+        if (!error) {
+          resolve(result);
+        } else {
+          reject(error);
+        }
+      });
+    });
+  }
 }

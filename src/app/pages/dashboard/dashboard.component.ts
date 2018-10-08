@@ -42,12 +42,16 @@ export class DashboardComponent implements OnInit {
     {'name': 'Tennessee', 'value': 'TN'}, {'name': 'Texas', 'value': 'TX'}, {'name': 'Utah', 'value': 'UT'},
     {'name': 'Vermont', 'value': 'VT'}, {'name': 'Virginia', 'value': 'VA'}, {'name': 'Washington', 'value': 'WA'},
     {'name': 'West Virginia', 'value': 'WV'}, {'name': 'Wisconsin', 'value': 'WI'}, {'name': 'Wyoming', 'value': 'WY'}];
+  recentlyCreatedProperties: any;
 
   constructor(private modalService: NgbModal, private contractService: ContractsService, private router: Router,
               private propertyService: PropertyService) {
   }
 
   ngOnInit() {
+    this.contractService.getRecentlyCreatedPropertyAddress1(this.tokenContractAddress).then(res => {
+      this.recentlyCreatedProperties = res;
+    });
     this.searchProperty.valueChanges.subscribe(
       propertyAddress => {
         if (propertyAddress !== '') {

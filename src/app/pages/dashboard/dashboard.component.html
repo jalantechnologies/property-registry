@@ -22,14 +22,25 @@
         </mat-autocomplete>
       </div>
     </div>
-  </div>
-  <br/>
-  <div class='row text-center'>
-    <div class='col-12'>
-      <a href='#' (click)="createPropertyTokenFormData(createPropertyTokenModal)">{{ 'DASHBOARD_CREATE_PROPERTY_TOKEN_BUTTON' | translate }}</a>
+    <br/>
+    <div class='row text-center'>
+      <div class='col-12'>
+        <a href='#' (click)="createPropertyTokenFormData(createPropertyTokenModal)">{{ 'DASHBOARD_CREATE_PROPERTY_TOKEN_BUTTON' | translate }}</a>
+      </div>
+    </div>
+    <br/><br/>
+    <div class="row">
+      <div class="col-sm-4 col-md-offset-1" *ngFor="let property of recentlyCreatedProperties">
+        <div class="tile" *ngIf="property">
+          <a href="/property-detail/{{property}}">
+            <img src="../../../assets/images/property_image.png" width="100" /><br/><br/>
+            <p>{{property}}</p>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
-  <br/><br/>
+  <br/>
 </div>
 <ng-template #createPropertyTokenModal>
   <div class="modal-header">
