@@ -114,10 +114,11 @@
         <p *ngIf="!verifyingPropertyAddress.isLoading && !verifyingPropertyAddress.isFinishedWithError">Are you sure you want to create a token for "<b>{{standardisedPropertyAddress}}</b>"?</p>
         <h5 *ngIf="verifyingPropertyAddress.isFinishedWithError">{{ 'PROPERTY_ADDRESS_INVALID_ERROR' | translate}}</h5>
         <div class="alert alert-success" *ngIf="propertyCreationViewState.isLoading"><i class="fa fa-spinner fa-spin" *ngIf='propertyCreationViewState.isLoading' style="font-size: 20px;"></i> {{ 'CREATE_PROPERTY_TOKEN_WAITING_DIALOGUE' | translate }}</div>
-        <div class="alert alert-danger" *ngIf="propertyCreationViewState.isFinishedWithError && !propertyCreationViewState.isLoading">{{ 'METAMASK_TRANSACTION_REJECTED_ERROR' | translate }}</div>
+        <div class="alert alert-danger" *ngIf="propertyCreationViewState.isFinishedWithError && !propertyCreationViewState.isLoading && propertyTokenCreateError">{{ 'PROPERTY_TOKEN_CREATION_ERROR' | translate }} <a href='mailto:info@proptoken.io'>info@proptoken.io</a> {{ 'PROPERTY_TOKEN_CREATION_ERROR1' | translate }}</div>
+        <div class="alert alert-danger" *ngIf="propertyCreationViewState.isFinishedWithError && !propertyCreationViewState.isLoading && !propertyTokenCreateError">{{ 'METAMASK_TRANSACTION_REJECTED_ERROR' | translate }}</div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" (click)="cancelAddressVerification()">{{ 'CANCEL' | translate}}</button>
-          <button type="submit" class="btn btn-primary" [disabled]="!propertyTokenForm.valid || propertyCreationViewState.isLoading || verifyingPropertyAddress.isLoading || verifyingPropertyAddress.isFinishedWithError">
+          <button type="submit" class="btn btn-primary" [disabled]="!propertyTokenForm.valid || propertyCreationViewState.isLoading || verifyingPropertyAddress.isLoading || verifyingPropertyAddress.isFinishedWithError || propertyTokenCreateError">
             <span *ngIf="!propertyCreationViewState.isLoading">{{ 'CREATE' | translate}}</span>
             <span *ngIf="propertyCreationViewState.isLoading">{{ 'CREATING' | translate}}</span>
           </button>

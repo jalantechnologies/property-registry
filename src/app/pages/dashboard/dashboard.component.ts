@@ -43,6 +43,7 @@ export class DashboardComponent implements OnInit {
     {'name': 'Vermont', 'value': 'VT'}, {'name': 'Virginia', 'value': 'VA'}, {'name': 'Washington', 'value': 'WA'},
     {'name': 'West Virginia', 'value': 'WV'}, {'name': 'Wisconsin', 'value': 'WI'}, {'name': 'Wyoming', 'value': 'WY'}];
   recentlyCreatedProperties: any;
+  propertyTokenCreateError = false;
 
   constructor(private modalService: NgbModal, private contractService: ContractsService, private router: Router,
               private propertyService: PropertyService) {
@@ -50,7 +51,9 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.contractService.getRecentlyCreatedPropertyAddress1(this.tokenContractAddress).then(res => {
-      this.recentlyCreatedProperties = res;
+      if (res[0]) {
+        this.recentlyCreatedProperties = res;
+      }
     });
     this.searchProperty.valueChanges.subscribe(
       propertyAddress => {
@@ -105,20 +108,27 @@ export class DashboardComponent implements OnInit {
   }
 
   cancelAddressVerification() {
+    this.propertyTokenCreateError = false;
     this.verifyingPropertyAddress.finishedWithSuccess();
     this.standardisedPropertyAddress = '';
     this.showAddressVerificationScreen = false;
   }
 
   createPropertyToken(formData) {
+    this.propertyTokenCreateError = false;
     this.propertyCreationViewState.load();
     this.contractService.createProperty(this.tokenContractAddress, formData.ownerWalletAddress, this.standardisedPropertyAddress,
       formData.ownerName, formData.ownerEmail).then(res => {
-        this.propertyService.storePropertyAddress(res).subscribe(response => {
-          this.router.navigate(['/property-detail', response.propertyAddress]);
-        });
-        this.modalRef.close();
-        this.propertyCreationViewState.finishedWithSuccess();
+        if (res.success) {
+          this.propertyService.storePropertyAddress(res).subscribe(response => {
+            this.router.navigate(['/property-detail', response.propertyAddress]);
+          });
+          this.modalRef.close();
+          this.propertyCreationViewState.finishedWithSuccess();
+        } else {
+          this.propertyCreationViewState.finishedWithError();
+          this.propertyTokenCreateError = true;
+        }
     }).catch(err => {
       this.propertyCreationViewState.finishedWithError(err);
     });

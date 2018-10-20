@@ -35,5 +35,7 @@
   "PROPERTY_ADDRESS_INVALID_ERROR": "Please enter valid property address",
   "ACCEPT": "Accept",
   "ACCEPTING": "Accepting",
-  "CANCEL": "Cancel"
+  "CANCEL": "Cancel",
+  "PROPERTY_TOKEN_CREATION_ERROR": "This operation could not be completed as a token has already been created for this property. Please reach out to",
+  "PROPERTY_TOKEN_CREATION_ERROR1": " if you have any questions."
 }
